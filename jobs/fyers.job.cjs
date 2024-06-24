@@ -11,8 +11,9 @@ const Subscribe_Fyers_Job = () => {
         const log_out = async () => {
             log.info('Fyers.job : Logout')
             Fyers.Logout()
-            const result = await Twilio.Send_WhatsApp_Message(`Fyers.job : logout_aftre_15Days : Loggedout from session`)
-            if (result == -1) log.error(`Fyers.job : logout_aftre_15Days : Error sending whatsapp message`)
+            Twilio.Send_WhatsApp_Message(
+                `Fyers.job : logout_aftre_15Days : Loggedout from session`
+            ).catch(_ => log.error(`Fyers.job : logout_aftre_15Days : Error sending whatsapp message`))
         }
         logout_task_id = setTimeout(log_out, REFRESH_TOKEN_VALIDITY * 24 * 60 * 60 * 1000)
     }
@@ -24,8 +25,9 @@ const Subscribe_Fyers_Job = () => {
         const refresh_token = async () => {
             log.info('Fyers.job : Refresh_Token')
             Fyers.Refresh_Token()
-            const result = await Twilio.Send_WhatsApp_Message(`Fyers.job : refresh_token_after_24Hrs : Session refreshed`)
-            if (result == -1) log.error(`Fyres.job : refresh_token_after_24Hrs : Error sending whatsapp message`)
+            Twilio.Send_WhatsApp_Message(
+                `Fyers.job : refresh_token_after_24Hrs : Session refreshed`
+            ).catch(_ => log.error(`Fyres.job : refresh_token_after_24Hrs : Error sending whatsapp message`))
         }
         refresh_token_task_id = setTimeout(refresh_token, ACCESS_TOKEN_VALIDITY * 60 * 60 * 1000)
     }

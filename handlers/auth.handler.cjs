@@ -9,10 +9,9 @@ router.post('/login', async (req, res) => {
         const { username, password } = req.body
         if (!username || !password) throw new Error('Must provide username and password')
 
-        const result = await Twilio.Send_WhatsApp_Message(
+        Twilio.Send_WhatsApp_Message(
             `Login attempted at ${DateTime.To_String().split(' GMT')[0]}`
-        )
-        if (result == -1) log.error(`Auth.handler : /auth/login : Error sending whatsapp message`)
+        ).catch(_ => og.error(`Auth.handler : /auth/login : Error sending whatsapp message`))
 
         if (username !== USERNAME || password !== PASSWORD) throw new Error('Invalid credentials')
 
@@ -44,3 +43,5 @@ router.get('/logout', async (req, res) => {
         return http.send_message(400, message)
     }
 })
+
+module.exports = router

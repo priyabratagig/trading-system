@@ -1,15 +1,11 @@
-// utilities/log.util.js
-
 const { createLogger, transports, format } = require('winston')
 const fs = require('fs')
 const path = require('path')
 
-// Dir, file
 const directory = path.join(__dirname, '..', 'logs')
 const info_file = path.join(directory, 'app.info.log')
 const error_file = path.join(directory, 'app.error.log')
 
-// Create logs directory if it doesn't exist
 if (!fs.existsSync(directory)) fs.mkdirSync(directory)
 
 const logger_info = createLogger({
@@ -19,7 +15,7 @@ const logger_info = createLogger({
         format.printf(({ timestamp, level, message }) => `${timestamp} :: ${level} :: ${message}`)
     ),
     transports: [
-        new transports.Console(),
+        //new transports.Console(),
         new transports.File({ filename: info_file })
     ]
 })
@@ -31,12 +27,12 @@ const logger_error = createLogger({
         format.printf(({ timestamp, level, message }) => `${timestamp} :: ${level} :: ${message}`)
     ),
     transports: [
-        new transports.Console(),
+        //new transports.Console(),
         new transports.File({ filename: error_file })
     ]
 })
 
-// altred
+
 const error = (message) => {
     //console.error(message)
     logger_info.error(message)

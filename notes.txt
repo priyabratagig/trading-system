@@ -12,8 +12,8 @@ Todo:
 2. Logs download x
 2. Frontend
 3. Deployment
-4. Login authntication
-5. Manual start/stop price monitor
+4. Login authntication x
+5. Manual start/stop price monitor x
 
 Capacity:
 ---------------------------

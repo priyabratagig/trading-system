@@ -32,9 +32,10 @@ const Delete_Funds = async () => {
 const Get_Funds = () => {
     const funds = parseInt(process.env.FUNDS, 10)
     if (!funds) {
-        Twilio.Send_WhatsApp_Message(`Funds.lib : Get_Fund, funds not set`).catch(_ =>
-            log.error(`Funds.lib : Get_Fund : Error sending whatsapp message`)
-        )
+        Twilio.Send_WhatsApp_Message(
+            `Funds.lib : Get_Fund, funds not set`
+        ).catch(_ => log.error(`Funds.lib : Get_Fund : Error sending whatsapp message`))
+
         throw new Error('Equity balance not set')
     }
     return funds

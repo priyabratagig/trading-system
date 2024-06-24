@@ -4,5 +4,6 @@ module.exports = {
     idea: require('./idea.handler.cjs'),
     order: require('./order.handler.cjs'),
     access_token: require('./access_token.handler.cjs'),
-    logs: require('./logs.handler.cjs')
+    logs: require('./logs.handler.cjs'),
+    system: require('./system.handler.cjs')
 }

@@ -62,8 +62,9 @@ class Fyers {
     static async #Notify_Access_Token() {
         if (Fyers.#access_token) return 1
 
-        const result = await Twilio.Send_WhatsApp_Message(`Fyers.util : Notify_Access_Token, access token not set`)
-        if (result == -1) log.error(`Fyers.util : Notify_Access_Token : Error sending whatsapp message`)
+        Twilio.Send_WhatsApp_Message(
+            `Fyers.util : Notify_Access_Token, access token not set`
+        ).catch(_ => log.error(`Fyers.util : Notify_Access_Token : Error sending whatsapp message`))
 
         throw new Error('Access token not set')
     }
@@ -168,11 +169,6 @@ class Fyers {
             fyers_model.setRedirectUrl(`https://trade.fyers.in/api-login/redirect-uri/index.html`)
             fyers_model.setAccessToken(Fyers.#access_token)
 
-            // altered
-            range_from.setDate(range_from.getDate() - 4)
-            range_to.setDate(range_to.getDate() - 4)
-            range_from.setHours(10)
-            range_to.setHours(11)
             range_from = DateTime.Datetime_To_EPOCH(range_from)
             range_to = DateTime.Datetime_To_EPOCH(range_to)
 
@@ -196,8 +192,7 @@ class Fyers {
         }
     }
 
-    // altered
-    static async Place_Order({ symbol, qty, type, side, productType, limitPrice, stopPrice = 0, disclosedQty = 0, validity = 'DAY', stopLoss = 0, takeProfit = 0, orderTag = 'VolumeBreakout' }, id) {
+    static async Place_Order({ symbol, qty, type, side, productType, limitPrice, stopPrice = 0, disclosedQty = 0, validity = 'DAY', stopLoss = 0, takeProfit = 0, orderTag = 'VolumeBreakout' }) {
         try {
             await Fyers.#Notify_Access_Token()
 
@@ -222,8 +217,8 @@ class Fyers {
                 orderTag
             }
             const response = await fyers_model.place_order(data)
-            //Fyers.#Check_Error(response)
-            const order_id = id
+            Fyers.#Check_Error(response)
+            const order_id = response.id
 
             return order_id
         }

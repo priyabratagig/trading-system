@@ -42,6 +42,12 @@ router.post('/buy', async (req, res) => {
 router.post('/webhook', async (req, res) => {
     const http = new HTTP(req, res)
     try {
+        if (process.env.SYSTEM_STATUS == "OFF") {
+            log.info(`Order.handler : /order/webhook : recived order postback but system stopped`)
+
+            return http.send_status(200)
+        }
+
         const {
             id: order_id, side, status, qty, remainingQuantity, filledQty,
             limitPrice, stopPrice, type, orderValidity, source, message,
@@ -50,11 +56,10 @@ router.post('/webhook', async (req, res) => {
 
         log.info(`Oder.handler : /order/webhook, symbol= ${symbol}, order_id= ${order_id}, status= ${STATUS_REV[status]}, datetime= ${DateTime.To_String()}`)
 
-        let result = await Twilio.Send_WhatsApp_Message(
+        Twilio.Send_WhatsApp_Message(
             `Order *${STATUS_REV[status]}*📨 : \`\`\`${DateTime.To_String(DateTime.Datetime_From_DateTimeNum(ideas[0].time)).split(' GMT')[0]}\`\`\`
             Symbol: *${symbol}* ${STATUS_REV[side]} at ${tradedPrice} qty.: ${filledQty}, ${message}`
-        )
-        if (result == -1) log.error(`Order.handler : /order/webhook : Error sending whatsapp message`)
+        ).catch(_ => log.error(`Order.handler : /order/webhook : Error sending whatsapp message`))
 
         if (source != SOURCE[API]) return http.send_status(200)
 

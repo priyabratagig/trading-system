@@ -6,8 +6,14 @@ const { Generate_Ideas } = require('../jobs')
 router.post('/chartink', async (req, res) => {
     const http = new HTTP(req, res)
     try {
+        if (process.env.SYSTEM_STATUS == "OFF") {
+            log.info(`Alert.handler : /alert/chartink : recived alerts but system stopped`)
+
+            return http.send_status(200)
+        }
+
         let { stocks, triggered_at } = req.body
-        if (typeof stocks != "string" || stocks.length < 1) throw new Error(`/alert/chartink : No stocks, stocks= ${stocks}`)
+        if (typeof stocks != "string" || stocks.length < 1) throw new Error(`No stocks`)
 
         log.info(`Alert.handler : /alert/chartink`)
 
@@ -18,7 +24,7 @@ router.post('/chartink', async (req, res) => {
         alters = stocks.map(stock => ({ symbol: stock, time: datetime }))
 
         const result = await Alert.insertMany(alters)
-        if (!result || result == -1) throw new Error(`Alerts not saved, alerts= ${JSON.stringify(alerts)}`)
+        if (!result || result == -1) throw new Error(`Alerts not saved, alerts= ${JSON.stringify(alters)}`)
         Generate_Ideas(alters)
 
         return http.send_status(200)

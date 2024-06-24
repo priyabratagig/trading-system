@@ -26,14 +26,13 @@ const Generate_Ideas = async (alerts) => {
             }
         }
 
-        const result = await Twilio.Send_WhatsApp_Message(
+        Twilio.Send_WhatsApp_Message(
             `Generated Ideas✨ : \`\`\`${DateTime.To_String(DateTime.Datetime_From_DateTimeNum(ideas[0].time)).split(' GMT')[0]}\`\`\`
             ${ideas.reduce((str, { symbol, entry, target, stop, qty }) => {
                 const message = `\nSymbol *${symbol}*:\n Entry: *${entry}*  Target: *${target}*  Stop: *${stop}* Qty.: *${qty}*`
                 return str = str + message
             }, '')}`
-        )
-        if (result == -1) log.error(`Idea.job : Generate_Ideas : Error sending whatsapp message`)
+        ).catch(_ => log.error(`Idea.job : Generate_Ideas : Error sending whatsapp message`))
 
         let new_ideas = await Idea.insertMany(ideas)
         if (!new_ideas || new_ideas == -1) throw new Error(`Ideas not saved, ideas= ${JSON.stringify(ideas)}`)

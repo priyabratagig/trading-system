@@ -43,10 +43,9 @@ const Price_Monitor = async () => {
     catch ({ message }) {
         log.error(`Price_Monitor.job : Price_Monitor : ${message}`)
 
-        const result = Twilio.Send_WhatsApp_Message(
+        Twilio.Send_WhatsApp_Message(
             `Danger📢 : Error in Price_Monitor`
-        )
-        if (result == -1) log.error(`Price_Monitor.job : Price_Monitor : Error sending whatsapp message`)
+        ).catch(_ => log.error(`Price_Monitor.job : Price_Monitor : Error sending whatsapp message`))
 
         return -1
     }
@@ -66,8 +65,9 @@ const start_job = new CronJob(
         job.start()
         log.info(`Price_Monitor.job : start_job, starting job at ${DateTime.To_String()}`)
 
-        const result = Twilio.Send_WhatsApp_Message(`Price_Monitor.job : start_job, starting job at ${DateTime.To_String()}`)
-        if (result == -1) log.error(`Price_Monitor.job : start_job : Error sending whatsapp message`)
+        Twilio.Send_WhatsApp_Message(
+            `Price_Monitor.job : start_job, starting job at ${DateTime.To_String()}`
+        ).catch(_ => log.error(`Price_Monitor.job : start_job : Error sending whatsapp message`))
     },
     null,
     false,
@@ -80,8 +80,9 @@ const stop_job = new CronJob(
         job.stop()
         log.info(`Price_Monitor.job : stop_job, stopped at ${DateTime.To_String()}`)
 
-        const result = Twilio.Send_WhatsApp_Message(`Price_Monitor.job : stop_job, stopped at ${DateTime.To_String()}`)
-        if (result == -1) log.error(`Price_Monitor.job : stop_job : Error sending whatsapp message`)
+        Twilio.Send_WhatsApp_Message(
+            `Price_Monitor.job : stop_job, stopped at ${DateTime.To_String()}`
+        ).catch(_ => log.error(`Price_Monitor.job : stop_job : Error sending whatsapp message`))
     },
     false,
     true,
@@ -109,8 +110,9 @@ const Subscribe_Price_Monitor = () => {
         job.start()
         log.info(`Price_Monitor.job : Subscribe_Price_Monitor, starting job at ${DateTime.To_String()}`)
 
-        const result = Twilio.Send_WhatsApp_Message(`Price_Monitor.job : Subscribe_Price_Monitor, starting job at ${DateTime.To_String()}`)
-        if (result == -1) log.error(`Price_Monitor.job : Subscribe_Price_Monitor : Error sending whatsapp message`)
+        Twilio.Send_WhatsApp_Message(
+            `Price_Monitor.job : Subscribe_Price_Monitor, starting job at ${DateTime.To_String()}`
+        ).catch(_ => log.error(`Price_Monitor.job : Subscribe_Price_Monitor : Error sending whatsapp message`))
     }
 }
 

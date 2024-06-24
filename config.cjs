@@ -14,8 +14,8 @@ const JWT_EXPIRY = process.env.JWT_EXPIRY
 const COOCKIE_SECRET = process.env.COOCKIE_SECRET
 const COOCKIE_EXPIRY = parseInt(process.env.COOCKIE_EXPIRY, 10)
 
-const USERNAME = process.env.USERNAME
-const PASSWORD = process.env.PASSWORD
+const USERNAME = process.env.LOGIN_USERNAME
+const PASSWORD = process.env.LOGIN_PASSWORD
 
 const TWILIO_ACCOUNT_SID = process.env.TWILIO_ACCOUNT_SID
 const TWILIO_AUTH_TOKEN = process.env.TWILIO_AUTH_TOKEN
