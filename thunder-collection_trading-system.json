@@ -2,7 +2,7 @@
     "clientName": "Thunder Client",
     "collectionName": "trading-system",
     "collectionId": "2c242b04-285c-4e80-b7a0-6f7abf13ffc3",
-    "dateExported": "2024-06-23T21:47:58.207Z",
+    "dateExported": "2024-06-24T21:28:44.267Z",
     "version": "1.2",
     "folders": [
         {
@@ -39,6 +39,27 @@
             "containerId": "",
             "created": "2024-06-22T15:33:42.552Z",
             "sortNum": 40000
+        },
+        {
+            "_id": "424b8326-58c4-4c30-b22e-14a71d159a33",
+            "name": "logs",
+            "containerId": "",
+            "created": "2024-06-24T06:55:42.859Z",
+            "sortNum": 50000
+        },
+        {
+            "_id": "bb8ff01a-f01b-44a6-9f26-014e39e46b3c",
+            "name": "system-status",
+            "containerId": "",
+            "created": "2024-06-24T20:39:31.838Z",
+            "sortNum": 60000
+        },
+        {
+            "_id": "b3661807-1050-4e55-823d-b97a02fabd32",
+            "name": "auth",
+            "containerId": "",
+            "created": "2024-06-24T20:41:21.052Z",
+            "sortNum": 70000
         }
     ],
     "requests": [
@@ -74,7 +95,7 @@
             "method": "POST",
             "sortNum": 20000,
             "created": "2024-06-20T21:52:46.018Z",
-            "modified": "2024-06-23T21:41:51.570Z",
+            "modified": "2024-06-24T21:28:00.293Z",
             "headers": [
                 {
                     "name": "Accept",
@@ -89,7 +110,7 @@
             ],
             "body": {
                 "type": "json",
-                "raw": "{\n  \"auth_code\" : \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJhcGkubG9naW4uZnllcnMuaW4iLCJpYXQiOjE3MTkxNzg5MDIsImV4cCI6MTcxOTIwODkwMiwibmJmIjoxNzE5MTc4MzAyLCJhdWQiOiJbXCJ4OjBcIiwgXCJ4OjFcIiwgXCJ4OjJcIiwgXCJkOjFcIiwgXCJkOjJcIiwgXCJ4OjFcIiwgXCJ4OjBcIl0iLCJzdWIiOiJhdXRoX2NvZGUiLCJkaXNwbGF5X25hbWUiOiJYUDM1NDIyIiwib21zIjoiSzEiLCJoc21fa2V5IjoiMTAxZGFmM2VhNzExYjU0YzQ1YmNjNGU4NzZlYzMwNzk3MjMxYTY0ZDFkNWNlOTYwYTI2YjQxMzkiLCJub25jZSI6IiIsImFwcF9pZCI6IlczUFJNSTJTS1EiLCJ1dWlkIjoiOWEzNmYwM2NiZGU3NDQ0YWJhZjRlZGZjNzY5ZGEyODgiLCJpcEFkZHIiOiIwLjAuMC4wIiwic2NvcGUiOiIifQ.gTVL-ViW9hBrsO5kI3zwiPEksR8Iq_lsAwtNYy9lZgQ\"\n}",
+                "raw": "{\n  \"auth_code\" : \"\"\n}",
                 "form": []
             }
         },
@@ -125,7 +146,7 @@
             "method": "POST",
             "sortNum": 40000,
             "created": "2024-06-21T18:56:56.599Z",
-            "modified": "2024-06-22T15:19:32.182Z",
+            "modified": "2024-06-24T08:42:08.264Z",
             "headers": [
                 {
                     "name": "Accept",
@@ -140,7 +161,7 @@
             ],
             "body": {
                 "type": "json",
-                "raw": "{\n    \"stocks\": \"SBIN,IEX,M&M,BAJAJ-AUTO,BPCL,IOC,IREDA,HAL\",\n    \"trigger_prices\": \"3.75,541.8,2.1,0.2,329.6,166.8,1.25\",\n    \"triggered_at\": \"9:30 AM\",\n    \"scan_name\": \"Short term breakouts\",\n    \"scan_url\": \"short-term-breakouts\",\n    \"alert_name\": \"Alert for Short term breakouts\",\n    \"webhook_url\": \"http://your-web-hook-url.com\"\n}",
+                "raw": "{\n    \"stocks\": \"SBIN,IEX,M&M,BAJAJ-AUTO,BPCL,IOC,IREDA,HAL\",\n    \"trigger_prices\": \"3.75,541.8,2.1,0.2,329.6,166.8,1.25\",\n    \"triggered_at\": \"2:30 PM\",\n    \"scan_name\": \"Short term breakouts\",\n    \"scan_url\": \"short-term-breakouts\",\n    \"alert_name\": \"Alert for Short term breakouts\",\n    \"webhook_url\": \"http://your-web-hook-url.com\"\n}",
                 "form": []
             }
         },
@@ -370,6 +391,149 @@
                     "isDisabled": true
                 }
             ]
+        },
+        {
+            "_id": "5ca35d46-2d91-4a12-86ca-8078d5c0260b",
+            "colId": "2c242b04-285c-4e80-b7a0-6f7abf13ffc3",
+            "containerId": "424b8326-58c4-4c30-b22e-14a71d159a33",
+            "name": "get-all-log-files",
+            "url": "/logs/all",
+            "method": "GET",
+            "sortNum": 140000,
+            "created": "2024-06-24T06:56:01.652Z",
+            "modified": "2024-06-24T06:56:11.822Z",
+            "headers": [
+                {
+                    "name": "Accept",
+                    "value": "*/*",
+                    "isDisabled": true
+                },
+                {
+                    "name": "User-Agent",
+                    "value": "Thunder Client (https://www.thunderclient.com)",
+                    "isDisabled": true
+                }
+            ]
+        },
+        {
+            "_id": "753657f2-70ef-43a7-b345-9a3b759b2201",
+            "colId": "2c242b04-285c-4e80-b7a0-6f7abf13ffc3",
+            "containerId": "424b8326-58c4-4c30-b22e-14a71d159a33",
+            "name": "download-log-file",
+            "url": "/logs/download/app.error.log",
+            "method": "GET",
+            "sortNum": 150000,
+            "created": "2024-06-24T07:01:39.612Z",
+            "modified": "2024-06-24T21:21:15.433Z",
+            "headers": [
+                {
+                    "name": "Accept",
+                    "value": "*/*",
+                    "isDisabled": true
+                },
+                {
+                    "name": "User-Agent",
+                    "value": "Thunder Client (https://www.thunderclient.com)",
+                    "isDisabled": true
+                }
+            ]
+        },
+        {
+            "_id": "163a080f-a99e-4580-9ef1-42ab2b2c3c51",
+            "colId": "2c242b04-285c-4e80-b7a0-6f7abf13ffc3",
+            "containerId": "bb8ff01a-f01b-44a6-9f26-014e39e46b3c",
+            "name": "system-start",
+            "url": "/system/start",
+            "method": "GET",
+            "sortNum": 160000,
+            "created": "2024-06-24T20:39:46.991Z",
+            "modified": "2024-06-24T20:40:37.388Z",
+            "headers": [
+                {
+                    "name": "Accept",
+                    "value": "*/*",
+                    "isDisabled": true
+                },
+                {
+                    "name": "User-Agent",
+                    "value": "Thunder Client (https://www.thunderclient.com)",
+                    "isDisabled": true
+                }
+            ]
+        },
+        {
+            "_id": "351a7bb7-b791-4bf0-a3ae-31fac39ac2c8",
+            "colId": "2c242b04-285c-4e80-b7a0-6f7abf13ffc3",
+            "containerId": "bb8ff01a-f01b-44a6-9f26-014e39e46b3c",
+            "name": "system-stop",
+            "url": "/system/stop",
+            "method": "GET",
+            "sortNum": 170000,
+            "created": "2024-06-24T20:39:57.694Z",
+            "modified": "2024-06-24T20:40:21.067Z",
+            "headers": [
+                {
+                    "name": "Accept",
+                    "value": "*/*",
+                    "isDisabled": true
+                },
+                {
+                    "name": "User-Agent",
+                    "value": "Thunder Client (https://www.thunderclient.com)",
+                    "isDisabled": true
+                }
+            ]
+        },
+        {
+            "_id": "c4fd364a-2a75-4162-936e-273d92c52a9b",
+            "colId": "2c242b04-285c-4e80-b7a0-6f7abf13ffc3",
+            "containerId": "b3661807-1050-4e55-823d-b97a02fabd32",
+            "name": "log-in",
+            "url": "/auth/login",
+            "method": "POST",
+            "sortNum": 190000,
+            "created": "2024-06-24T20:41:30.753Z",
+            "modified": "2024-06-24T21:27:47.450Z",
+            "headers": [
+                {
+                    "name": "Accept",
+                    "value": "*/*",
+                    "isDisabled": true
+                },
+                {
+                    "name": "User-Agent",
+                    "value": "Thunder Client (https://www.thunderclient.com)",
+                    "isDisabled": true
+                }
+            ],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"username\" : \"\",\n  \"password\": \"\"\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "aef1f657-62e6-467c-8f36-24eb2d341669",
+            "colId": "2c242b04-285c-4e80-b7a0-6f7abf13ffc3",
+            "containerId": "b3661807-1050-4e55-823d-b97a02fabd32",
+            "name": "log-out",
+            "url": "/auth/logout",
+            "method": "GET",
+            "sortNum": 200000,
+            "created": "2024-06-24T20:42:57.121Z",
+            "modified": "2024-06-24T20:52:32.454Z",
+            "headers": [
+                {
+                    "name": "Accept",
+                    "value": "*/*",
+                    "isDisabled": true
+                },
+                {
+                    "name": "User-Agent",
+                    "value": "Thunder Client (https://www.thunderclient.com)",
+                    "isDisabled": true
+                }
+            ]
         }
     ],
     "settings": {
@@ -377,5 +541,5 @@
             "baseUrl": "http://localhost:5000"
         }
     },
-    "ref": "5DxVIVnAx503HG8jl7LjG9EdJd1P-7MQaK-nEGlBtrk9DYZqVJ5RbemkNCWI8hSZbsiHQxLLw_9sT0ZHGvmVTg"
+    "ref": "5DxVIVnAx503HG8jl7LjG3GKq00JxgzsktFoexesfwFZ7wR_8YexgSCddnd4CgOiy_fy2sYusB7E3Xvs4Xfp-g"
 }
