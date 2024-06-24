@@ -1,0 +1,381 @@
+{
+    "clientName": "Thunder Client",
+    "collectionName": "trading-system",
+    "collectionId": "2c242b04-285c-4e80-b7a0-6f7abf13ffc3",
+    "dateExported": "2024-06-23T21:47:58.207Z",
+    "version": "1.2",
+    "folders": [
+        {
+            "_id": "4dc1dfea-e37d-44ee-b080-f0811ad9aeb5",
+            "name": "access-code",
+            "containerId": "",
+            "created": "2024-06-20T21:51:48.466Z",
+            "sortNum": 10000
+        },
+        {
+            "_id": "94e09d73-55b3-4a69-900d-3baaf98a9668",
+            "name": "alert",
+            "containerId": "",
+            "created": "2024-06-21T18:56:33.001Z",
+            "sortNum": 20000
+        },
+        {
+            "_id": "b2e7ebfb-f3c0-47e5-8ae8-b10123083dca",
+            "name": "idea",
+            "containerId": "",
+            "created": "2024-06-22T13:55:37.280Z",
+            "sortNum": 30000
+        },
+        {
+            "_id": "ce053a3c-b5d9-4ea8-9e7f-ca83fffcc83f",
+            "name": "fund",
+            "containerId": "",
+            "created": "2024-06-23T07:13:08.456Z",
+            "sortNum": 35000
+        },
+        {
+            "_id": "4cb8bb62-1028-41bd-b34b-977d9e73ab9c",
+            "name": "order",
+            "containerId": "",
+            "created": "2024-06-22T15:33:42.552Z",
+            "sortNum": 40000
+        }
+    ],
+    "requests": [
+        {
+            "_id": "a7dc68bb-a7a6-4ef0-9fe6-a013bca40fb7",
+            "colId": "2c242b04-285c-4e80-b7a0-6f7abf13ffc3",
+            "containerId": "4dc1dfea-e37d-44ee-b080-f0811ad9aeb5",
+            "name": "get-login-link",
+            "url": "/token/get-login-link",
+            "method": "GET",
+            "sortNum": 10000,
+            "created": "2024-06-20T21:52:12.946Z",
+            "modified": "2024-06-23T06:10:33.349Z",
+            "headers": [
+                {
+                    "name": "Accept",
+                    "value": "*/*",
+                    "isDisabled": true
+                },
+                {
+                    "name": "User-Agent",
+                    "value": "Thunder Client (https://www.thunderclient.com)",
+                    "isDisabled": true
+                }
+            ]
+        },
+        {
+            "_id": "d6043262-bfc7-44fd-9faf-0a1446dff486",
+            "colId": "2c242b04-285c-4e80-b7a0-6f7abf13ffc3",
+            "containerId": "4dc1dfea-e37d-44ee-b080-f0811ad9aeb5",
+            "name": "set-auth-code",
+            "url": "/token/set-auth-code",
+            "method": "POST",
+            "sortNum": 20000,
+            "created": "2024-06-20T21:52:46.018Z",
+            "modified": "2024-06-23T21:41:51.570Z",
+            "headers": [
+                {
+                    "name": "Accept",
+                    "value": "*/*",
+                    "isDisabled": true
+                },
+                {
+                    "name": "User-Agent",
+                    "value": "Thunder Client (https://www.thunderclient.com)",
+                    "isDisabled": true
+                }
+            ],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"auth_code\" : \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJhcGkubG9naW4uZnllcnMuaW4iLCJpYXQiOjE3MTkxNzg5MDIsImV4cCI6MTcxOTIwODkwMiwibmJmIjoxNzE5MTc4MzAyLCJhdWQiOiJbXCJ4OjBcIiwgXCJ4OjFcIiwgXCJ4OjJcIiwgXCJkOjFcIiwgXCJkOjJcIiwgXCJ4OjFcIiwgXCJ4OjBcIl0iLCJzdWIiOiJhdXRoX2NvZGUiLCJkaXNwbGF5X25hbWUiOiJYUDM1NDIyIiwib21zIjoiSzEiLCJoc21fa2V5IjoiMTAxZGFmM2VhNzExYjU0YzQ1YmNjNGU4NzZlYzMwNzk3MjMxYTY0ZDFkNWNlOTYwYTI2YjQxMzkiLCJub25jZSI6IiIsImFwcF9pZCI6IlczUFJNSTJTS1EiLCJ1dWlkIjoiOWEzNmYwM2NiZGU3NDQ0YWJhZjRlZGZjNzY5ZGEyODgiLCJpcEFkZHIiOiIwLjAuMC4wIiwic2NvcGUiOiIifQ.gTVL-ViW9hBrsO5kI3zwiPEksR8Iq_lsAwtNYy9lZgQ\"\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "e1a9b12e-35b2-4a78-8704-98f91c69c370",
+            "colId": "2c242b04-285c-4e80-b7a0-6f7abf13ffc3",
+            "containerId": "4dc1dfea-e37d-44ee-b080-f0811ad9aeb5",
+            "name": "refresh-access-token",
+            "url": "/token/refresh-access-token",
+            "method": "GET",
+            "sortNum": 30000,
+            "created": "2024-06-21T13:08:32.909Z",
+            "modified": "2024-06-23T06:21:09.315Z",
+            "headers": [
+                {
+                    "name": "Accept",
+                    "value": "*/*",
+                    "isDisabled": true
+                },
+                {
+                    "name": "User-Agent",
+                    "value": "Thunder Client (https://www.thunderclient.com)",
+                    "isDisabled": true
+                }
+            ]
+        },
+        {
+            "_id": "8669ae55-8df6-405f-a3af-940007401bf3",
+            "colId": "2c242b04-285c-4e80-b7a0-6f7abf13ffc3",
+            "containerId": "94e09d73-55b3-4a69-900d-3baaf98a9668",
+            "name": "chartink-alert",
+            "url": "/alert/chartink",
+            "method": "POST",
+            "sortNum": 40000,
+            "created": "2024-06-21T18:56:56.599Z",
+            "modified": "2024-06-22T15:19:32.182Z",
+            "headers": [
+                {
+                    "name": "Accept",
+                    "value": "*/*",
+                    "isDisabled": true
+                },
+                {
+                    "name": "User-Agent",
+                    "value": "Thunder Client (https://www.thunderclient.com)",
+                    "isDisabled": true
+                }
+            ],
+            "body": {
+                "type": "json",
+                "raw": "{\n    \"stocks\": \"SBIN,IEX,M&M,BAJAJ-AUTO,BPCL,IOC,IREDA,HAL\",\n    \"trigger_prices\": \"3.75,541.8,2.1,0.2,329.6,166.8,1.25\",\n    \"triggered_at\": \"9:30 AM\",\n    \"scan_name\": \"Short term breakouts\",\n    \"scan_url\": \"short-term-breakouts\",\n    \"alert_name\": \"Alert for Short term breakouts\",\n    \"webhook_url\": \"http://your-web-hook-url.com\"\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "4042c561-a188-4c1f-9022-04f0340f5c7e",
+            "colId": "2c242b04-285c-4e80-b7a0-6f7abf13ffc3",
+            "containerId": "b2e7ebfb-f3c0-47e5-8ae8-b10123083dca",
+            "name": "today",
+            "url": "/idea/today",
+            "method": "GET",
+            "sortNum": 60000,
+            "created": "2024-06-22T13:55:53.338Z",
+            "modified": "2024-06-22T14:02:07.037Z",
+            "headers": [
+                {
+                    "name": "Accept",
+                    "value": "*/*",
+                    "isDisabled": true
+                },
+                {
+                    "name": "User-Agent",
+                    "value": "Thunder Client (https://www.thunderclient.com)",
+                    "isDisabled": true
+                }
+            ]
+        },
+        {
+            "_id": "a5a01c9b-6148-4073-96e0-163a56538594",
+            "colId": "2c242b04-285c-4e80-b7a0-6f7abf13ffc3",
+            "containerId": "b2e7ebfb-f3c0-47e5-8ae8-b10123083dca",
+            "name": "delete-idea",
+            "url": "/idea/delete/6677c1ec47a3e795b383da3c",
+            "method": "DELETE",
+            "sortNum": 70000,
+            "created": "2024-06-22T15:25:37.974Z",
+            "modified": "2024-06-23T06:38:02.254Z",
+            "headers": [
+                {
+                    "name": "Accept",
+                    "value": "*/*",
+                    "isDisabled": true
+                },
+                {
+                    "name": "User-Agent",
+                    "value": "Thunder Client (https://www.thunderclient.com)",
+                    "isDisabled": true
+                }
+            ]
+        },
+        {
+            "_id": "5780a4d3-759c-47eb-ba4a-90cbe1ba446d",
+            "colId": "2c242b04-285c-4e80-b7a0-6f7abf13ffc3",
+            "containerId": "4dc1dfea-e37d-44ee-b080-f0811ad9aeb5",
+            "name": "logout",
+            "url": "/token/logout",
+            "method": "GET",
+            "sortNum": 80000,
+            "created": "2024-06-23T06:11:29.597Z",
+            "modified": "2024-06-23T06:11:51.281Z",
+            "headers": [
+                {
+                    "name": "Accept",
+                    "value": "*/*",
+                    "isDisabled": true
+                },
+                {
+                    "name": "User-Agent",
+                    "value": "Thunder Client (https://www.thunderclient.com)",
+                    "isDisabled": true
+                }
+            ]
+        },
+        {
+            "_id": "3c0f5c1d-bd51-4c9e-b463-d09c0f422a85",
+            "colId": "2c242b04-285c-4e80-b7a0-6f7abf13ffc3",
+            "containerId": "ce053a3c-b5d9-4ea8-9e7f-ca83fffcc83f",
+            "name": "get-funds",
+            "url": "/funds/get",
+            "method": "GET",
+            "sortNum": 90000,
+            "created": "2024-06-23T07:13:28.213Z",
+            "modified": "2024-06-23T07:13:50.465Z",
+            "headers": [
+                {
+                    "name": "Accept",
+                    "value": "*/*",
+                    "isDisabled": true
+                },
+                {
+                    "name": "User-Agent",
+                    "value": "Thunder Client (https://www.thunderclient.com)",
+                    "isDisabled": true
+                }
+            ]
+        },
+        {
+            "_id": "6e9e5a15-2819-4303-bd8a-3ae231960df5",
+            "colId": "2c242b04-285c-4e80-b7a0-6f7abf13ffc3",
+            "containerId": "4cb8bb62-1028-41bd-b34b-977d9e73ab9c",
+            "name": "place-buy-order",
+            "url": "/order/buy",
+            "method": "POST",
+            "sortNum": 100000,
+            "created": "2024-06-23T08:18:44.030Z",
+            "modified": "2024-06-23T21:19:29.466Z",
+            "headers": [
+                {
+                    "name": "Accept",
+                    "value": "*/*",
+                    "isDisabled": true
+                },
+                {
+                    "name": "User-Agent",
+                    "value": "Thunder Client (https://www.thunderclient.com)",
+                    "isDisabled": true
+                }
+            ],
+            "body": {
+                "type": "json",
+                "raw": "{\r\n  \"idea_id\" : \"6677c1ec47a3e795b383da40\",\r\n  \"symbol\": \"BPCL\",\r\n  \"time\": 202406240930,\r\n  \"entry\": 311,\r\n  \"target\": 316,\r\n  \"stop\": 310\r\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "69ed6835-e379-4d3d-8730-e45683ffcdc3",
+            "colId": "2c242b04-285c-4e80-b7a0-6f7abf13ffc3",
+            "containerId": "4cb8bb62-1028-41bd-b34b-977d9e73ab9c",
+            "name": "/order/webhook",
+            "url": "/order/webhook",
+            "method": "POST",
+            "sortNum": 105000,
+            "created": "2024-06-23T16:27:43.692Z",
+            "modified": "2024-06-23T19:55:19.965Z",
+            "headers": [
+                {
+                    "name": "Accept",
+                    "value": "*/*",
+                    "isDisabled": true
+                },
+                {
+                    "name": "User-Agent",
+                    "value": "Thunder Client (https://www.thunderclient.com)",
+                    "isDisabled": true
+                }
+            ],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"orderDateTime\": \"18-Jul-2023 11:44:29\",\n  \"id\": \"6677c1ec47a3e795b383da3d\",\n  \"exchOrdId\": \"2500000061319029\",\n  \"side\": -1,\n  \"segment\": 11,\n  \"instrument\": 15,\n  \"productType\": \"INTRADAY\",\n  \"status\": 1,\n  \"qty\": 5400,\n  \"remainingQuantity\": 0,\n  \"filledQty\": 5400,\n  \"limitPrice\": 2.15,\n  \"stopPrice\": 0,\n  \"type\": 2,\n  \"discloseQty\": 0,\n  \"dqQtyRem\": 0,\n  \"orderValidity\": \"DAY\",\n  \"source\": \"ITS\",\n  \"fyToken\": \"101123072754619\",\n  \"offlineOrder\": false,\n  \"message\": \"Completed\",\n  \"orderNumStatus\": \"23071800238607:2\",\n  \"tradedPrice\": 2.15,\n  \"exchange\": 10,\n  \"pan\": \"\",\n  \"clientId\": \"xxxx\",\n  \"symbol\": \"NSE:ABCAPITAL23JUL190CE\"\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "331fa196-bd0d-41ce-a3fe-4ba69216393e",
+            "colId": "2c242b04-285c-4e80-b7a0-6f7abf13ffc3",
+            "containerId": "4cb8bb62-1028-41bd-b34b-977d9e73ab9c",
+            "name": "place-sell-order",
+            "url": "/order/sell",
+            "method": "POST",
+            "sortNum": 110000,
+            "created": "2024-06-23T08:18:55.447Z",
+            "modified": "2024-06-23T21:40:51.994Z",
+            "headers": [
+                {
+                    "name": "Accept",
+                    "value": "*/*",
+                    "isDisabled": true
+                },
+                {
+                    "name": "User-Agent",
+                    "value": "Thunder Client (https://www.thunderclient.com)",
+                    "isDisabled": true
+                }
+            ],
+            "body": {
+                "type": "json",
+                "raw": "{\r\n  \"symbol\": \"BPCL\",\r\n  \"exit\": 310,\r\n  \"buy_order_id\": \"6677c1ec47a3e795b383da40\",\r\n  \"filled_qty\": 67\r\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "61358d09-fd00-47b6-b60a-9d31865bed7c",
+            "colId": "2c242b04-285c-4e80-b7a0-6f7abf13ffc3",
+            "containerId": "4cb8bb62-1028-41bd-b34b-977d9e73ab9c",
+            "name": "cancel-order",
+            "url": "/order/cancel",
+            "method": "POST",
+            "sortNum": 120000,
+            "created": "2024-06-23T08:19:13.500Z",
+            "modified": "2024-06-23T21:44:29.501Z",
+            "headers": [
+                {
+                    "name": "Accept",
+                    "value": "*/*",
+                    "isDisabled": true
+                },
+                {
+                    "name": "User-Agent",
+                    "value": "Thunder Client (https://www.thunderclient.com)",
+                    "isDisabled": true
+                }
+            ],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"order_id\": \"6677c1ec47a3e795b383da3d\",\n  \"symbol\": \"IEX\"\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "c144bb05-f2d9-4b77-bfdd-02f9fb31770c",
+            "colId": "2c242b04-285c-4e80-b7a0-6f7abf13ffc3",
+            "containerId": "4cb8bb62-1028-41bd-b34b-977d9e73ab9c",
+            "name": "all-orders",
+            "url": "/order/all",
+            "method": "GET",
+            "sortNum": 130000,
+            "created": "2024-06-23T08:19:23.430Z",
+            "modified": "2024-06-23T21:03:53.328Z",
+            "headers": [
+                {
+                    "name": "Accept",
+                    "value": "*/*",
+                    "isDisabled": true
+                },
+                {
+                    "name": "User-Agent",
+                    "value": "Thunder Client (https://www.thunderclient.com)",
+                    "isDisabled": true
+                }
+            ]
+        }
+    ],
+    "settings": {
+        "options": {
+            "baseUrl": "http://localhost:5000"
+        }
+    },
+    "ref": "5DxVIVnAx503HG8jl7LjG9EdJd1P-7MQaK-nEGlBtrk9DYZqVJ5RbemkNCWI8hSZbsiHQxLLw_9sT0ZHGvmVTg"
+}

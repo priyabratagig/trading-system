@@ -1,0 +1,28 @@
+{
+  "name": "trading.system.-0.0",
+  "version": "1.0.0",
+  "description": "Stock screener, oder placement, and auto exits",
+  "main": "index.cjs",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon --env-file=.env.local index.cjs"
+  },
+  "author": "Priyabrata",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.7.2",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "cron": "^3.1.7",
+    "express": "^4.19.2",
+    "fyers-api-v3": "^1.2.1",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.4.3",
+    "twilio": "^5.2.0",
+    "winston": "^3.13.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.7",
+    "nodemon": "^3.1.3"
+  }
+}

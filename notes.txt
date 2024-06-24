@@ -1,0 +1,26 @@
+Next Release:
+----------------------------------------
+1. Creating price alters, postpond for later
+2. Apis and methods takes agrs but some has no use or impacts
+3. Document object fected in insided methods, can be utilized
+3. Logs view and download
+4. Stop/Start api
+
+Todo:
+------------------------------
+1. Twilio implement x
+2. Logs download x
+2. Frontend
+3. Deployment
+4. Login authntication
+5. Manual start/stop price monitor
+
+Capacity:
+---------------------------
+1. Logs in with broker 
+2. Recive alters : Recives the alert and converts to ideas
+3. Convert to ideas : automatically
+4. Trade : User will choose to trade with, also their won price point
+5. Cancle order : If not executed in 15 mins, or manually
+6. Order : Can view, and create orders
+7. Monitor : System loops over check for price of in trade positions and place sell order; scheduled job
