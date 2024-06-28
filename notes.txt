@@ -3,17 +3,16 @@ Next Release:
 1. Creating price alters, postpond for later
 2. Apis and methods takes agrs but some has no use or impacts
 3. Document object fected in insided methods, can be utilized
-3. Logs view and download
-4. Stop/Start api
+3. Fyers token cancelation rules
+4. Find solution for whatsapp alerts
 
 Todo:
 ------------------------------
-1. Twilio implement x
-2. Logs download x
-2. Frontend
-3. Deployment
-4. Login authntication x
-5. Manual start/stop price monitor x
+1. Frontend
+2. Deployment
+3. Test order place, price history against symbol names &,- [x]
+4. Look through for overal temporal changes [x]
+5. Add twilo notifiation for token set, unset 
 
 Capacity:
 ---------------------------

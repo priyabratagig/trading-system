@@ -121,7 +121,7 @@ class Datetime {
         if (!match) throw Error(`TimeNum_From_12H : Time invalid, ${time}`)
 
         let [, hours, minutes, period] = match
-        hours = period.toLowerCase() == 'pm' ? 12 + +hours : +hours
+        hours = period.toLowerCase() == 'am' || hours == 12 ? +hours : 12 + +hours
 
         time = Datetime.Now()
         time.setHours(+hours)

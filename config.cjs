@@ -36,6 +36,8 @@ const SEVER_IP = process.env.IP
 const SERVER_PORT = parseInt(process.env.SERVER_PORT, 10)
 const ALLOWED_ORIGIN = process.env.ALLOWED_ORIGIN
 
+const API_ROOT = process.env.API_ROOT
+
 const SIDE = Object.freeze({
     BUY: 1,
     SELL: -1
@@ -46,7 +48,7 @@ const POSITION = Object.freeze({
     CLOSED: 0
 })
 const STATUS = Object.freeze({
-    CANCELED: 1,
+    CANCELLED: 1,
     FILLED: 2,
     TRANSIST: 4,
     REJECTED: 5,
@@ -99,7 +101,7 @@ const WAITING = 'WAITING'
 const TRANSIST = 'TRANSIST'
 const FILLED = 'FILLED'
 const EXITED = 'EXITED'
-const CANCELED = 'CANCELED'
+const CANCELLED = 'CANCELLED'
 const REJECTED = 'REJECTED'
 const EXPIRED = 'EXPIRED'
 
@@ -148,6 +150,8 @@ module.exports = {
     SEVER_IP,
     ALLOWED_ORIGIN,
 
+    API_ROOT,
+
     SIDE,
     SIDE_REV,
     BUY,
@@ -164,7 +168,7 @@ module.exports = {
     PENDING,
     FILLED,
     TRANSIST,
-    CANCELED,
+    CANCELLED,
     REJECTED,
     EXPIRED,
     EXITED,

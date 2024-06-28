@@ -4,6 +4,7 @@ const log = require('./log.util.cjs')
 const axios = require('axios')
 const DateTime = require('./datetime.util.cjs')
 const Twilio = require("./twilio.util.cjs")
+const path = require('path')
 
 class FyersEvent {
     static event = Object.freeze({
@@ -51,12 +52,17 @@ class Fyers {
     static #login_link = null
     static #access_token = null
     static #refresh_token = null
+    static #path = path.join(__dirname, '..', 'logs')
 
     static #Check_Error({ code, s, message }) {
         if (isNaN(code) || Number(code) > 0) return false
         if (s.toLowerCase() != 'error') return false
 
         throw new Error(message)
+    }
+
+    static Get_Status() {
+        return !!(Fyers.#refresh_token && Fyers.#access_token)
     }
 
     static async #Notify_Access_Token() {
@@ -74,6 +80,10 @@ class Fyers {
         Fyers.#access_token = null
         Fyers.#refresh_token = null
 
+        Twilio.Send_WhatsApp_Message(
+            `Fyers.util : Loggout, Logged out from fyers`
+        ).catch(_ => log.error(`Fyers.util : Logout : Error sending whatsapp message`))
+
         FyersEvent.loggedout(Fyers)
     }
 
@@ -81,7 +91,7 @@ class Fyers {
         try {
             if (!!Fyers.#login_link) return Fyers.#login_link
 
-            const fyers_model = new FyersAPI.fyersModel()
+            const fyers_model = new FyersAPI.fyersModel({ path: Fyers.#path })
             fyers_model.setAppId(APP_ID)
             fyers_model.setRedirectUrl(`https://trade.fyers.in/api-login/redirect-uri/index.html`)
             const response = await fyers_model.generateAuthCode()
@@ -104,7 +114,7 @@ class Fyers {
             if (!!Fyers.#refresh_token) return Fyers.#refresh_token
             if (!Fyers.#login_link) throw new Error('Login link not genereated')
 
-            const fyers_model = new FyersAPI.fyersModel()
+            const fyers_model = new FyersAPI.fyersModel({ path: Fyers.#path })
             fyers_model.setAppId(APP_ID)
             fyers_model.setRedirectUrl("https://trade.fyers.in/api-login/redirect-uri/index.html")
             const response = await fyers_model.generate_access_token({ secret_key: SECRET_KEY, auth_code })
@@ -113,6 +123,10 @@ class Fyers {
             const { access_token, refresh_token } = response
             Fyers.#access_token = access_token
             Fyers.#refresh_token = refresh_token
+
+            Twilio.Send_WhatsApp_Message(
+                `Fyers.util : Login, Logged into fyers`
+            ).catch(_ => log.error(`Fyers.util : Login : Error sending whatsapp message`))
 
             Fyers.#login_link = null
             FyersEvent.loggedin(Fyers)
@@ -164,13 +178,14 @@ class Fyers {
         try {
             await Fyers.#Notify_Access_Token()
 
-            const fyers_model = new FyersAPI.fyersModel()
+            const fyers_model = new FyersAPI.fyersModel({ path: Fyers.#path })
             fyers_model.setAppId(APP_ID)
             fyers_model.setRedirectUrl(`https://trade.fyers.in/api-login/redirect-uri/index.html`)
             fyers_model.setAccessToken(Fyers.#access_token)
 
             range_from = DateTime.Datetime_To_EPOCH(range_from)
             range_to = DateTime.Datetime_To_EPOCH(range_to)
+            symbol = encodeURIComponent(symbol)
 
             const data = {
                 symbol,
@@ -196,7 +211,7 @@ class Fyers {
         try {
             await Fyers.#Notify_Access_Token()
 
-            const fyers_model = new FyersAPI.fyersModel()
+            const fyers_model = new FyersAPI.fyersModel({ path: Fyers.#path })
             fyers_model.setAppId(APP_ID)
             fyers_model.setRedirectUrl(`https://trade.fyers.in/api-login/redirect-uri/index.html`)
             fyers_model.setAccessToken(Fyers.#access_token)
@@ -233,7 +248,7 @@ class Fyers {
         try {
             await Fyers.#Notify_Access_Token()
 
-            const fyers_model = new FyersAPI.fyersModel()
+            const fyers_model = new FyersAPI.fyersModel({ path: Fyers.#path })
             fyers_model.setAppId(APP_ID)
             fyers_model.setRedirectUrl(`https://trade.fyers.in/api-login/redirect-uri/index.html`)
             fyers_model.setAccessToken(Fyers.#access_token)
@@ -256,7 +271,7 @@ class Fyers {
         try {
             await Fyers.#Notify_Access_Token()
 
-            const fyers_model = new FyersAPI.fyersModel()
+            const fyers_model = new FyersAPI.fyersModel({ path: Fyers.#path })
             fyers_model.setAppId(APP_ID)
             fyers_model.setRedirectUrl(`https://trade.fyers.in/api-login/redirect-uri/index.html`)
             fyers_model.setAccessToken(Fyers.#access_token)
@@ -280,7 +295,7 @@ class Fyers {
         try {
             await Fyers.#Notify_Access_Token()
 
-            const fyers_model = new FyersAPI.fyersModel()
+            const fyers_model = new FyersAPI.fyersModel({ path: Fyers.#path })
             fyers_model.setAppId(APP_ID)
             fyers_model.setRedirectUrl(`https://trade.fyers.in/api-login/redirect-uri/index.html`)
             fyers_model.setAccessToken(Fyers.#access_token)
@@ -302,7 +317,7 @@ class Fyers {
         try {
             await Fyers.#Notify_Access_Token()
 
-            const fyers_model = new FyersAPI.fyersModel()
+            const fyers_model = new FyersAPI.fyersModel({ path: Fyers.#path })
             fyers_model.setAppId(APP_ID)
             fyers_model.setRedirectUrl(`https://trade.fyers.in/api-login/redirect-uri/index.html`)
             fyers_model.setAccessToken(Fyers.#access_token)

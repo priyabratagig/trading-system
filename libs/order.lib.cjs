@@ -1,4 +1,4 @@
-const { TYPE, LIMIT, SIDE, BUY, SELL, MARKET, STATUS, FILLED, CANCELED, PENDING, WAITING } = require('../config.cjs')
+const { TYPE, LIMIT, SIDE, BUY, SELL, MARKET, STATUS, FILLED, CANCELLED, PENDING, WAITING } = require('../config.cjs')
 const symbol_master = require('../meta/symbol.master')
 const { Order } = require('../models')
 const { log, Fyers, DateTime } = require('../utils')
@@ -22,7 +22,7 @@ class OrderEvent {
         OrderEvent.#on_sell_callbacks.forEach(fn => fn(order))
     }
 
-    static async canceled(order) {
+    static async cancelled(order) {
         OrderEvent.#on_cancel_callbacks.forEach(fn => fn(order))
     }
 
@@ -79,25 +79,26 @@ const Place_Buy_Order = async ({ idea_id, symbol, time, entry, target, stop, typ
     try {
         let order = {
             symbol: symbol_master[symbol], qty, type,
-            side: SIDE[BUY], productType: "INTRADAY", limitPrice: entry,
+            side: SIDE[BUY], productType: "INTRADAY", limitPrice: type == TYPE[LIMIT] ? entry : 0,
             stopPrice: 0, validity: "DAY", stopLoss: 0,
             takeProfit: 0, offlineOrder: false, disclosedQty: 0
         }
         const order_id = await Fyers.Place_Order(order)
         if (!order_id || order_id == -1) throw new Error(`Error placing order, order_details= ${JSON.stringify(order)}`)
 
-        OrderEvent.brought(order_id, order, { idea_id, symbol, time, entry, target, stop, type })
-
         const order_entry_time = DateTime.DateNum_Today() + DateTime.TimeNum_Now()
         let new_order = new Order({
-            idea_id, symbol, time, entry, effective_entry: 0,
-            target, stop, order_entry_time, buy_order_id: String(order_id),
-            sell_order_id: '0', status: PENDING,
-            filled_qty: 0, exit_price: 0, order_exit_time: 0
+            idea_id, symbol, time, entry, effective_entry: 0, target,
+            stop, order_entry_time, buy_order_id: String(order_id),
+            sell_order_id: '0', status: PENDING, filled_qty: 0,
+            exit_price: 0, order_exit_time: 0, current_price: 0
         })
         new_order = await new_order.save()
         if (!new_order || order == -1) throw new Error(`Error saving order, order_details= ${JSON.stringify(order)}`)
         new_order = new_order._doc
+
+        OrderEvent.brought(String(new_order._id), order, { idea_id, symbol, time, entry, target, stop, type })
+
 
         return { ...new_order, order_id }
     }
@@ -127,7 +128,7 @@ const Place_Sell_Order = async ({ buy_order_id, exit, type = TYPE[LIMIT] }) => {
             takeProfit: 0, offlineOrder: false, disclosedQty: 0
         }
         const order_id = await Fyers.Place_Order(new_order)
-        if (!order_id || order_id == -1) throw new Error(`Error placing sell order, symbol= ${symbol}, buy_order_id=  ${buy_order_id}`)
+        if (!order_id || order_id == -1) throw new Error(`Error placing sell order, symbol= ${order.symbol}, buy_order_id=  ${buy_order_id}`)
 
         OrderEvent.sold(order_id, new_order, order._doc)
 
@@ -154,7 +155,7 @@ const Place_Sell_Order = async ({ buy_order_id, exit, type = TYPE[LIMIT] }) => {
 
 const Place_Cancel_Order = async ({ order_id }) => {
     try {
-        let order = await Order.findOne({ $or: [{ buy_order_id: order_id }, { sell_order_id: order_id }] })
+        let order = await Order.findById(order_id)
         if (order == -1) throw new Error(`Error fetching order, oder_id= ${order_id}`)
         if (!order || !order._doc) throw new Error(`Order not found, order_id= ${order_id}`)
 
@@ -164,10 +165,10 @@ const Place_Cancel_Order = async ({ order_id }) => {
             return 1
         }
 
-        const cancel = await Fyers.Cancel_Order({ order_id })
+        const cancel = await Fyers.Cancel_Order({ order_id: order.buy_order_id })
         if (!cancel || cancel == -1) throw new Error(`Error canceling order, symbol= ${order.symbol}, order_id= ${order_id}`)
 
-        OrderEvent.canceled(cancel, { order_id }, order)
+        OrderEvent.cancelled(cancel, { order_id }, order)
 
         return 1
     }

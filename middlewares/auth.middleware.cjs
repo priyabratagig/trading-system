@@ -1,4 +1,4 @@
-const { JWT_SECRET, USERNAME, PASSWORD } = require('../config.cjs')
+const { JWT_SECRET, USERNAME, PASSWORD, API_ROOT } = require('../config.cjs')
 const jwt = require('jsonwebtoken')
 const { HTTP, log } = require("../utils")
 
@@ -11,7 +11,7 @@ const OPEN_ACCESS_ROUTES = [
 const authenticate = (req, res, next) => {
     const http = new HTTP(req, res, next)
     try {
-        if (OPEN_ACCESS_ROUTES.some(route => route.test(req.url))) return next()
+        if (OPEN_ACCESS_ROUTES.some(route => route.test(req.url.split(API_ROOT)[1]))) return next()
 
         if (!req.signedCookies?.access_token) throw new Error('Unauthorized access')
 
@@ -29,7 +29,7 @@ const authenticate = (req, res, next) => {
     } catch ({ message }) {
         log.error(`Auth.middleware : authenticate : ${message}`)
 
-        return http.send_message(403, message)
+        return http.send_message(401, message)
     }
 }
 

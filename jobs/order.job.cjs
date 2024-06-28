@@ -9,7 +9,8 @@ const Subscribe_Orber_Jobs = () => {
         clearTimeout(cancel_buy_order)
 
         const at = DateTime.Get_Next_N_15Min_Time()[0]
-        const wait = DateTime.Get_Time_Diff_MS(DateTime.Now(), at)
+        let wait = DateTime.Get_Time_Diff_MS(DateTime.Now(), at)
+        wait = wait < 60000 ? 0 : wait - 60000
         cancel_buy_order_task_id = setTimeout(async () => {
             await Place_Cancel_Order({ order_id })
         }, wait)

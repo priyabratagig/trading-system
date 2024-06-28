@@ -6,6 +6,8 @@ const fs = require('fs')
 router.get('/all', (req, res) => {
     const http = new HTTP(req, res)
     try {
+        log.info(`Log.handler : /logs/all`)
+
         fs.readdir(log.directory, (err, files) => {
             if (err) {
                 log.error(`Log.handler : /logs/all : ${err.message}`)
@@ -27,6 +29,8 @@ router.get('/download/:filename', (req, res) => {
     try {
         const filename = req.params.filename
         const filePath = path.join(log.directory, filename)
+
+        log.info(`Log.handler : /logs/download/:filename : ${filename}`)
 
         fs.access(filePath, fs.constants.F_OK, (err) => {
             if (err) {

@@ -17,8 +17,12 @@ class HTTPUtils {
         return this.res.status(status).json({ message: message })
     }
 
-    send_file(status, filePath, err_callback) {
+    send_file(status = 500, filePath, err_callback) {
         return this.res.status(status).download(filePath, err_callback)
+    }
+
+    send_page(status = 500, filePath) {
+        return this.res.status(status).sendFile(filePath)
     }
 
     set_cookie(cookie_name, cookie, options) {
@@ -31,6 +35,10 @@ class HTTPUtils {
         this.res.clearCookie(cookie_name)
 
         return this
+    }
+
+    redirect(status = 500, url) {
+        return this.res.status(status).redirect(url)
     }
 }
 

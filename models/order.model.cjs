@@ -1,6 +1,5 @@
 const mongoose = require('mongoose')
 const { STATUS, EXITED } = require('../config.cjs')
-const { type } = require('os')
 
 const OrderSchema = new mongoose.Schema({
     idea_id: {
@@ -44,6 +43,9 @@ const OrderSchema = new mongoose.Schema({
     },
     exit_price: {
         type: Number, require: [true, "Order.model : Exit price is required"]
+    },
+    current_price: {
+        type: Number, require: [true, "Order.model : Current price is required"]
     },
     message: {
         type: String, default: ""

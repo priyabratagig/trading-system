@@ -44,7 +44,7 @@ router.get('/refresh-access-token', async (req, res) => {
         log.info(`Token.handler : /token/refresh-access-token`)
 
         const result = await Fyers.Refresh_Token()
-        if (result == -1) throw new Error('Error refreshing access token')
+        if (result == -1) throw new Error('Refresh token not found')
 
         return http.send_message(200, 'Access token refreshed successfully')
     }
@@ -66,6 +66,22 @@ router.get('/logout', async (req, res) => {
     }
     catch ({ message }) {
         log.error(`Token.handler : /token/logout : ${message}`)
+
+        return http.send_message(500, message)
+    }
+})
+
+router.get('/get-status', async (req, res) => {
+    const http = new HTTP(req, res)
+    try {
+        log.info(`Token.handler : /token/get-status`)
+
+        const status = Fyers.Get_Status()
+
+        return http.send_json(200, { status })
+    }
+    catch ({ message }) {
+        log.error(`Token.handler : /token/get-status : ${message}`)
 
         return http.send_message(500, message)
     }

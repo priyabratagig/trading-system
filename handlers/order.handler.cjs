@@ -1,7 +1,7 @@
 const router = require("express").Router()
 const { log, HTTP, DateTime, Twilio } = require('../utils')
 const { Order, Idea } = require('../models')
-const { SOURCE, API, CANCELED, REJECTED, EXPIRED, FILLED, TRANSIST, BUY, SIDE, EXITED, STATUS_REV, TYPE_REV } = require('../config.cjs')
+const { SOURCE, API, CANCELLED, REJECTED, EXPIRED, FILLED, TRANSIST, BUY, SIDE, EXITED, STATUS_REV, TYPE_REV } = require('../config.cjs')
 const { Get_All_Orders_Today, Place_Buy_Order, Place_Sell_Order, Place_Cancel_Order } = require("../libs")
 
 router.post('/buy', async (req, res) => {
@@ -57,7 +57,7 @@ router.post('/webhook', async (req, res) => {
         log.info(`Oder.handler : /order/webhook, symbol= ${symbol}, order_id= ${order_id}, status= ${STATUS_REV[status]}, datetime= ${DateTime.To_String()}`)
 
         Twilio.Send_WhatsApp_Message(
-            `Order *${STATUS_REV[status]}*📨 : \`\`\`${DateTime.To_String(DateTime.Datetime_From_DateTimeNum(ideas[0].time)).split(' GMT')[0]}\`\`\`
+            `Order *${STATUS_REV[status]}*📨 : \`\`\`${DateTime.To_String().split(' GMT')[0]}\`\`\`
             Symbol: *${symbol}* ${STATUS_REV[side]} at ${tradedPrice} qty.: ${filledQty}, ${message}`
         ).catch(_ => log.error(`Order.handler : /order/webhook : Error sending whatsapp message`))
 
@@ -65,14 +65,14 @@ router.post('/webhook', async (req, res) => {
 
         result = -1
         switch (STATUS_REV[status]) {
-            case CANCELED:
+            case CANCELLED:
             case REJECTED:
             case EXPIRED:
                 result = (side == SIDE[BUY]) ?
                     await Order.findOneAndUpdate({ buy_order_id: order_id }, {
                         order_entry_time: 0,
                         buy_order_id: "0",
-                        status: CANCELED,
+                        status: CANCELLED,
                         effective_entry: 0,
                         message: message
                     }) :
@@ -92,11 +92,13 @@ router.post('/webhook', async (req, res) => {
                         filled_qty: filledQty,
                         effective_entry: tradedPrice,
                         status: STATUS_REV[status],
+                        current_price: tradedPrice,
                         message: message
                     }) :
                     await Order.findOneAndUpdate({ sell_order_id: order_id }, {
                         exit_price: tradedPrice,
                         status: qty == filledQty ? EXITED : STATUS_REV[status],
+                        current_price: tradedPrice,
                         message: message
                     })
                 break
@@ -165,7 +167,7 @@ router.post('/cancel', async (req, res) => {
         const order = await Place_Cancel_Order({ order_id })
         if (!order || order == -1) throw new Error(`Error placing cancel order,  order_id= ${order_id}, symbol= ${symbol}`)
 
-        return http.send_json(200, "Order canceled")
+        return http.send_json(200, "Order cancelled")
     }
     catch ({ message }) {
         log.error(`Order.handler : /order/sell : ${message}`)

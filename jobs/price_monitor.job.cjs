@@ -18,6 +18,7 @@ const Price_Monitor = async () => {
             if (!candles || candles == -1) throw new Error(`Error fetching candles, oder_details= ${JSON.stringify(order._doc)}`)
 
             const [, , high, , close] = candles[0]
+            const [, , , , current_price] = candles[1]
 
             const next_candle_time = DateTime.Get_Next_N_15Min_Time()[0]
             let wait = DateTime.Get_Time_Diff_MS(time, next_candle_time)
@@ -30,13 +31,17 @@ const Price_Monitor = async () => {
                     Place_Sell_Order({ buy_order_id, type: TYPE[MARKET] })
                 }, wait)
 
-                const new_order = await Order.findOneAndUpdate({ buy_order_id: order.buy_order_id }, { status: WAITING })
+                const new_order = await Order.findOneAndUpdate({ buy_order_id: order.buy_order_id }, { status: WAITING, current_price: current_price })
                 if (!new_order || new_order == -1) throw new Error(`Order cannot be updated, order_details= ${JSON.stringify(order._doc)}`)
 
                 Twilio.Send_WhatsApp_Message(
                     `*IMPORTANT📌* :
-                    ${close <= stop ? 'Stop' : 'Target'} hit, *${Symbol}* by ${close <= stop ? close : high}₹ at \`\`\`${DateTime.To_String(DateTime.Datetime_From_DateTimeNum(ideas[0].time)).split(' GMT')[0]}\`\`\``
+                    ${close <= stop ? 'Stop' : 'Target'} hit, *${symbol}* by ${close <= stop ? close : high}₹ at \`\`\`${DateTime.To_String().split(' GMT')[0]}\`\`\``
                 ).catch(_ => log.error(`Price_Monitor.job : Price_Monitor : Error sending whatsapp message`))
+            }
+            else {
+                const new_order = await Order.findOneAndUpdate({ buy_order_id: order.buy_order_id }, { current_price: current_price })
+                if (!new_order || new_order == -1) throw new Error(`Order cannot be updated, order_details= ${JSON.stringify(order._doc)}`)
             }
         }
     }

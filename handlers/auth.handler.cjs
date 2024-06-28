@@ -9,11 +9,13 @@ router.post('/login', async (req, res) => {
         const { username, password } = req.body
         if (!username || !password) throw new Error('Must provide username and password')
 
-        Twilio.Send_WhatsApp_Message(
-            `Login attempted at ${DateTime.To_String().split(' GMT')[0]}`
-        ).catch(_ => og.error(`Auth.handler : /auth/login : Error sending whatsapp message`))
+        log.info(`Auth.handler : /auth/login : Login attempted at ${DateTime.To_String().split(' GMT')[0]}`)
 
         if (username !== USERNAME || password !== PASSWORD) throw new Error('Invalid credentials')
+
+        Twilio.Send_WhatsApp_Message(
+            `Login attempted at ${DateTime.To_String().split(' GMT')[0]}`
+        ).catch(() => log.error(`Auth.handler : /auth/login : Error sending whatsapp message`))
 
         const access_token = jwt.sign(
             { USERNAME, PASSWORD },
@@ -35,6 +37,8 @@ router.post('/login', async (req, res) => {
 router.get('/logout', async (req, res) => {
     const http = new HTTP(req, res)
     try {
+        log.info(`Auth.handler : /auth/logout`)
+
         return http.delete_cookie('access_token').send_message(200, "Successfully logged-out")
     }
     catch ({ message }) {

@@ -21,11 +21,11 @@ router.post('/chartink', async (req, res) => {
         const today = DateTime.DateNum_Today()
         const datetime = today + time
         stocks = stocks.split(',')
-        alters = stocks.map(stock => ({ symbol: stock, time: datetime }))
+        const alerts = stocks.map(stock => ({ symbol: stock, time: datetime }))
 
-        const result = await Alert.insertMany(alters)
-        if (!result || result == -1) throw new Error(`Alerts not saved, alerts= ${JSON.stringify(alters)}`)
-        Generate_Ideas(alters)
+        const result = await Alert.insertMany(alerts)
+        if (!result || result == -1) throw new Error(`Alerts not saved, alerts= ${JSON.stringify(alerts)}`)
+        Generate_Ideas(alerts)
 
         return http.send_status(200)
     }

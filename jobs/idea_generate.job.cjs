@@ -1,6 +1,7 @@
 const { Idea } = require('../models')
 const { log, Twilio, DateTime } = require('../utils')
 const { Get_Buy_Target_Stop, Get_Funds } = require('../libs')
+const { default: AutoTrade } = require('./trade.job.cjs')
 
 const Generate_Ideas = async (alerts) => {
     try {
@@ -10,9 +11,9 @@ const Generate_Ideas = async (alerts) => {
         const position_size = Math.floor(funds / 3)
 
         const ideas = []
-        for (const alter of alerts) {
+        for (let alert of alerts) {
             try {
-                const { symbol, time } = alter
+                const { symbol, time } = alert
                 const result = await Get_Buy_Target_Stop(symbol, time)
                 if (result == -1) throw new Error(`Error generating idea : symbol= ${symbol}, time= ${time}`)
 
@@ -48,6 +49,8 @@ const Generate_Ideas = async (alerts) => {
                 idea_id: String(idea_id),
                 ...idea
             }))
+
+        AutoTrade(ideas)
 
         return new_ideas
     }
