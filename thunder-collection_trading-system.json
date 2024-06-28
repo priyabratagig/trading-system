@@ -2,7 +2,7 @@
     "clientName": "Thunder Client",
     "collectionName": "trading-system",
     "collectionId": "2c242b04-285c-4e80-b7a0-6f7abf13ffc3",
-    "dateExported": "2024-06-24T21:28:44.267Z",
+    "dateExported": "2024-06-28T08:19:24.828Z",
     "version": "1.2",
     "folders": [
         {
@@ -60,6 +60,13 @@
             "containerId": "",
             "created": "2024-06-24T20:41:21.052Z",
             "sortNum": 70000
+        },
+        {
+            "_id": "3ab007ee-73e9-4481-b659-d4419f315186",
+            "name": "autotrade",
+            "containerId": "",
+            "created": "2024-06-28T08:12:54.040Z",
+            "sortNum": 80000
         }
     ],
     "requests": [
@@ -146,7 +153,7 @@
             "method": "POST",
             "sortNum": 40000,
             "created": "2024-06-21T18:56:56.599Z",
-            "modified": "2024-06-24T08:42:08.264Z",
+            "modified": "2024-06-27T07:23:10.564Z",
             "headers": [
                 {
                     "name": "Accept",
@@ -161,7 +168,7 @@
             ],
             "body": {
                 "type": "json",
-                "raw": "{\n    \"stocks\": \"SBIN,IEX,M&M,BAJAJ-AUTO,BPCL,IOC,IREDA,HAL\",\n    \"trigger_prices\": \"3.75,541.8,2.1,0.2,329.6,166.8,1.25\",\n    \"triggered_at\": \"2:30 PM\",\n    \"scan_name\": \"Short term breakouts\",\n    \"scan_url\": \"short-term-breakouts\",\n    \"alert_name\": \"Alert for Short term breakouts\",\n    \"webhook_url\": \"http://your-web-hook-url.com\"\n}",
+                "raw": "{\n    \"stocks\": \"SBIN,IEX,M&M,BAJAJ-AUTO,BPCL,IOC,IREDA,HAL,NALCO,SAIL\",\n    \"trigger_prices\": \"3.75,541.8,2.1,0.2,329.6,166.8,1.25\",\n    \"triggered_at\": \"12:30 PM\",\n    \"scan_name\": \"Short term breakouts\",\n    \"scan_url\": \"short-term-breakouts\",\n    \"alert_name\": \"Alert for Short term breakouts\",\n    \"webhook_url\": \"http://your-web-hook-url.com\"\n}",
                 "form": []
             }
         },
@@ -294,7 +301,7 @@
             "method": "POST",
             "sortNum": 105000,
             "created": "2024-06-23T16:27:43.692Z",
-            "modified": "2024-06-23T19:55:19.965Z",
+            "modified": "2024-06-27T20:16:24.003Z",
             "headers": [
                 {
                     "name": "Accept",
@@ -309,7 +316,7 @@
             ],
             "body": {
                 "type": "json",
-                "raw": "{\n  \"orderDateTime\": \"18-Jul-2023 11:44:29\",\n  \"id\": \"6677c1ec47a3e795b383da3d\",\n  \"exchOrdId\": \"2500000061319029\",\n  \"side\": -1,\n  \"segment\": 11,\n  \"instrument\": 15,\n  \"productType\": \"INTRADAY\",\n  \"status\": 1,\n  \"qty\": 5400,\n  \"remainingQuantity\": 0,\n  \"filledQty\": 5400,\n  \"limitPrice\": 2.15,\n  \"stopPrice\": 0,\n  \"type\": 2,\n  \"discloseQty\": 0,\n  \"dqQtyRem\": 0,\n  \"orderValidity\": \"DAY\",\n  \"source\": \"ITS\",\n  \"fyToken\": \"101123072754619\",\n  \"offlineOrder\": false,\n  \"message\": \"Completed\",\n  \"orderNumStatus\": \"23071800238607:2\",\n  \"tradedPrice\": 2.15,\n  \"exchange\": 10,\n  \"pan\": \"\",\n  \"clientId\": \"xxxx\",\n  \"symbol\": \"NSE:ABCAPITAL23JUL190CE\"\n}",
+                "raw": "{\n  \"orderDateTime\": \"18-Jul-2023 11:44:29\",\n  \"id\": \"667d9bdc6b1ae3b0dc220677\",\n  \"exchOrdId\": \"2500000061319029\",\n  \"side\": 1,\n  \"segment\": 11,\n  \"instrument\": 15,\n  \"productType\": \"INTRADAY\",\n  \"status\": 2,\n  \"qty\": 5400,\n  \"remainingQuantity\": 0,\n  \"filledQty\": 5400,\n  \"limitPrice\": 2.15,\n  \"stopPrice\": 0,\n  \"type\": 2,\n  \"discloseQty\": 0,\n  \"dqQtyRem\": 0,\n  \"orderValidity\": \"DAY\",\n  \"source\": \"ITS\",\n  \"fyToken\": \"101123072754619\",\n  \"offlineOrder\": false,\n  \"message\": \"Completed\",\n  \"orderNumStatus\": \"23071800238607:2\",\n  \"tradedPrice\": 2.15,\n  \"exchange\": 10,\n  \"pan\": \"\",\n  \"clientId\": \"xxxx\",\n  \"symbol\": \"NSE:ABCAPITAL23JUL190CE\"\n}",
                 "form": []
             }
         },
@@ -493,7 +500,7 @@
             "method": "POST",
             "sortNum": 190000,
             "created": "2024-06-24T20:41:30.753Z",
-            "modified": "2024-06-24T21:27:47.450Z",
+            "modified": "2024-06-26T18:58:23.767Z",
             "headers": [
                 {
                     "name": "Accept",
@@ -508,7 +515,7 @@
             ],
             "body": {
                 "type": "json",
-                "raw": "{\n  \"username\" : \"\",\n  \"password\": \"\"\n}",
+                "raw": "{\n  \"username\" : \"s\",\n  \"password\": \"s\"\n}",
                 "form": []
             }
         },
@@ -534,12 +541,139 @@
                     "isDisabled": true
                 }
             ]
+        },
+        {
+            "_id": "1f9e7321-4c74-49a0-b478-7d7e13a0ca8c",
+            "colId": "2c242b04-285c-4e80-b7a0-6f7abf13ffc3",
+            "containerId": "bb8ff01a-f01b-44a6-9f26-014e39e46b3c",
+            "name": "get-status",
+            "url": "/system/get-status",
+            "method": "GET",
+            "sortNum": 210000,
+            "created": "2024-06-26T17:57:38.196Z",
+            "modified": "2024-06-26T17:57:58.405Z",
+            "headers": [
+                {
+                    "name": "Accept",
+                    "value": "*/*",
+                    "isDisabled": true
+                },
+                {
+                    "name": "User-Agent",
+                    "value": "Thunder Client (https://www.thunderclient.com)",
+                    "isDisabled": true
+                }
+            ]
+        },
+        {
+            "_id": "e5a64722-bd63-4932-afb8-d4e9274c0236",
+            "colId": "2c242b04-285c-4e80-b7a0-6f7abf13ffc3",
+            "containerId": "4dc1dfea-e37d-44ee-b080-f0811ad9aeb5",
+            "name": "get-status",
+            "url": "/token/get-status",
+            "method": "GET",
+            "sortNum": 230000,
+            "created": "2024-06-26T18:22:48.332Z",
+            "modified": "2024-06-26T18:23:05.346Z",
+            "headers": [
+                {
+                    "name": "Accept",
+                    "value": "*/*",
+                    "isDisabled": true
+                },
+                {
+                    "name": "User-Agent",
+                    "value": "Thunder Client (https://www.thunderclient.com)",
+                    "isDisabled": true
+                }
+            ]
+        },
+        {
+            "_id": "8ab3f824-686f-4412-8fcc-be144698383b",
+            "colId": "2c242b04-285c-4e80-b7a0-6f7abf13ffc3",
+            "containerId": "",
+            "name": "webapp",
+            "url": "../../../",
+            "method": "GET",
+            "sortNum": 240000,
+            "created": "2024-06-28T05:59:15.794Z",
+            "modified": "2024-06-28T06:24:54.245Z",
+            "headers": []
+        },
+        {
+            "_id": "c0234b26-13cc-43ba-a644-81183cab36e5",
+            "colId": "2c242b04-285c-4e80-b7a0-6f7abf13ffc3",
+            "containerId": "3ab007ee-73e9-4481-b659-d4419f315186",
+            "name": "auto-trade-on",
+            "url": "/auto-trade/on",
+            "method": "GET",
+            "sortNum": 260000,
+            "created": "2024-06-28T08:13:42.951Z",
+            "modified": "2024-06-28T08:15:03.282Z",
+            "headers": [
+                {
+                    "name": "Accept",
+                    "value": "*/*",
+                    "isDisabled": true
+                },
+                {
+                    "name": "User-Agent",
+                    "value": "Thunder Client (https://www.thunderclient.com)",
+                    "isDisabled": true
+                }
+            ]
+        },
+        {
+            "_id": "16ae4589-b5cb-47da-b3df-587414d55a4d",
+            "colId": "2c242b04-285c-4e80-b7a0-6f7abf13ffc3",
+            "containerId": "3ab007ee-73e9-4481-b659-d4419f315186",
+            "name": "auto-trade-off",
+            "url": "/auto-trade/off",
+            "method": "GET",
+            "sortNum": 270000,
+            "created": "2024-06-28T08:13:59.979Z",
+            "modified": "2024-06-28T08:15:18.159Z",
+            "headers": [
+                {
+                    "name": "Accept",
+                    "value": "*/*",
+                    "isDisabled": true
+                },
+                {
+                    "name": "User-Agent",
+                    "value": "Thunder Client (https://www.thunderclient.com)",
+                    "isDisabled": true
+                }
+            ]
+        },
+        {
+            "_id": "2b47988a-8b3e-4ee3-b2a9-a56173c0a4b1",
+            "colId": "2c242b04-285c-4e80-b7a0-6f7abf13ffc3",
+            "containerId": "3ab007ee-73e9-4481-b659-d4419f315186",
+            "name": "auto-trade-status",
+            "url": "/auto-trade/get-status",
+            "method": "GET",
+            "sortNum": 280000,
+            "created": "2024-06-28T08:14:13.647Z",
+            "modified": "2024-06-28T08:15:36.358Z",
+            "headers": [
+                {
+                    "name": "Accept",
+                    "value": "*/*",
+                    "isDisabled": true
+                },
+                {
+                    "name": "User-Agent",
+                    "value": "Thunder Client (https://www.thunderclient.com)",
+                    "isDisabled": true
+                }
+            ]
         }
     ],
     "settings": {
         "options": {
-            "baseUrl": "http://localhost:5000"
+            "baseUrl": "http://localhost:5000/api/v1"
         }
     },
-    "ref": "5DxVIVnAx503HG8jl7LjG3GKq00JxgzsktFoexesfwFZ7wR_8YexgSCddnd4CgOiy_fy2sYusB7E3Xvs4Xfp-g"
+    "ref": "5DxVIVnAx503HG8jl7LjG7Pfgnlt-UIYNOi_jV6mXYi9pTwsHijT37Rl1DHcPJDKljtzCG4b3LaiS3jS00XobA"
 }
