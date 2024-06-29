@@ -1,5 +1,6 @@
-const cors = require('cors');
-const { ALLOWED_ORIGINS } = require('../config.cjs');
+const { ALLOWED_ORIGINS } = require('../config.cjs')
+const cors = require('cors')
+const { log } = require('../utils')
 
 const corsOptions = {
     origin: (req_origin, callback) => {
@@ -14,7 +15,11 @@ const corsOptions = {
         )
 
         if (isAllowed) callback(null, true)
-        else callback(new Error('Not allowed by CORS'))
+        else {
+            log.error(`Cors.middleware : origin : ${req_origin} not allowed`)
+
+            callback(new Error('Not allowed by CORS'))
+        }
     },
     credentials: true
 }
