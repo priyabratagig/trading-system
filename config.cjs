@@ -1,5 +1,23 @@
-const DEV = process.env.MODE == 'DEV'
-const PROD = process.env.MODE == 'PROD'
+const DEV = process.env.NODE_ENV === 'development'
+const PROD = process.env.NODE_ENV === 'production'
+
+const SEVER_IP = process.env.IP
+const SERVER_PORT = parseInt(process.env.SERVER_PORT, 10)
+const ALLOWED_ORIGINS = String(process.env.ALLOWED_ORIGINS).split(',')
+
+const MONGODB_INSTANCE_LOCAL = process.env.MONGODB_INSTANCE === 'local'
+const MONGODB_INSTANCE_ATLAS = process.env.MONGODB_INSTANCE === 'atlas'
+const MONGODB_HOST = process.env.MONGODB_HOST
+const MONGODB_PORT = parseInt(process.env.MONGODB_PORT)
+const MONGODB_DBNAMNE = process.env.MONGODB_DBNAMNE
+const MONGODB_USER = process.env.MONGODB_USER
+const MONGODB_PASSWORD = process.env.MONGODB_PASSWORD
+const MONGODB_CLUSTER = process.env.MONGODB_CLUSTER
+const MONGODB_URI = MONGODB_INSTANCE_LOCAL ?
+    `mongodb://${MONGODB_HOST}:${MONGODB_PORT}/${MONGODB_DBNAMNE}?retryWrites=true&w=majority` :
+    `mongodb+srv://${MONGODB_USER}:${MONGODB_PASSWORD}@${MONGODB_CLUSTER}.mongodb.net/${MONGODB_DBNAMNE}?retryWrites=true&w=majority`
+
+const API_ROOT = process.env.API_ROOT
 
 const APP_ID = process.env.APP_ID
 const SECRET_KEY = process.env.SECRET_KEY
@@ -21,22 +39,6 @@ const TWILIO_ACCOUNT_SID = process.env.TWILIO_ACCOUNT_SID
 const TWILIO_AUTH_TOKEN = process.env.TWILIO_AUTH_TOKEN
 const TWILIO_SENDER_NUMBER = process.env.TWILIO_SENDER_NUMBER
 const TWILIO_RECEIVER_NUMBER = process.env.TWILIO_RECEIVER_NUMBER
-
-const MONGODB_USER = process.env.MONGODB_USER
-const MONGODB_PASSWORD = process.env.MONGODB_PASSWORD
-const MONGODB_CLUSTER = process.env.MONGODB_CLUSTER
-const MONGODB_DBNAMNE = process.env.MONGODB_DBNAMNE
-const MONGODB_HOST = process.env.MONGODB_HOST
-const MONGODB_PORT = parseInt(process.env.MONGODB_PORT)
-const MONGODB_URI = DEV ?
-    `mongodb://${MONGODB_HOST}:${MONGODB_PORT}/${MONGODB_DBNAMNE}?retryWrites=true&w=majority` :
-    `mongodb+srv://${MONGODB_USER}:${MONGODB_PASSWORD}@${MONGODB_CLUSTER}.mongodb.net/${MONGODB_DBNAMNE}?retryWrites=true&w=majority`
-
-const SEVER_IP = process.env.IP
-const SERVER_PORT = parseInt(process.env.SERVER_PORT, 10)
-const ALLOWED_ORIGIN = process.env.ALLOWED_ORIGIN
-
-const API_ROOT = process.env.API_ROOT
 
 const SIDE = Object.freeze({
     BUY: 1,
@@ -120,6 +122,19 @@ module.exports = {
     DEV,
     PROD,
 
+    SERVER_PORT,
+    SEVER_IP,
+    ALLOWED_ORIGINS,
+
+    MONGODB_INSTANCE_LOCAL,
+    MONGODB_INSTANCE_ATLAS,
+    MONGODB_URI,
+    MONGODB_CLUSTER,
+    MONGODB_PORT,
+    MONGODB_DBNAMNE,
+
+    API_ROOT,
+
     APP_ID,
     SECRET_KEY,
     APP_ID_HASH,
@@ -141,16 +156,7 @@ module.exports = {
     TWILIO_SENDER_NUMBER,
     TWILIO_RECEIVER_NUMBER,
 
-    MONGODB_URI,
-    MONGODB_CLUSTER,
-    MONGODB_PORT,
-    MONGODB_DBNAMNE,
-
-    SERVER_PORT,
-    SEVER_IP,
-    ALLOWED_ORIGIN,
-
-    API_ROOT,
+    //---------------------------------------------------
 
     SIDE,
     SIDE_REV,

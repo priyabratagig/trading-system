@@ -12,6 +12,12 @@ const AutoTrade = async (ideas) => {
             return 1
         }
 
+        const time_num = DateTime.TimeNum_Now()
+        if (time_num < 930 || time_num >= 1045) {
+            log.info(`Trade.job : AutoTrade : Entry time expired, time= ${time_num}`)
+            return 1
+        }
+
         const range_from = DateTime.DateNum_From_Date(DateTime.Get_Previous_N_Dates()[0])
         const range_to = DateTime.DateNum_From_Date(DateTime.Get_Next_N_Dates()[0])
         let orders = await Order.find({ time: { $gte: range_from, $lt: range_to }, status: { $nin: [CANCELLED, REJECTED, EXPIRED] } })

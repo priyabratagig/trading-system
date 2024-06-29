@@ -5,7 +5,9 @@
   "main": "index.cjs",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon --env-file=.env.local index.cjs"
+    "start": "set NODE_ENV=production && node index.cjs",
+    "dev": "set NODE_ENV=development && nodemon --env-file=.env.development index.cjs",
+    "prod": "set NODE_ENV=production && nodemon --env-file=.env.production index.cjs"
   },
   "author": "Priyabrata",
   "license": "ISC",

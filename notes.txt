@@ -8,11 +8,9 @@ Next Release:
 
 Todo:
 ------------------------------
-1. Frontend
+1. Frontend x
 2. Deployment
-3. Test order place, price history against symbol names &,- [x]
-4. Look through for overal temporal changes [x]
-5. Add twilo notifiation for token set, unset 
+3. Handle cross x
 
 Capacity:
 ---------------------------

@@ -5,13 +5,16 @@ const { HTTP, log } = require("../utils")
 const OPEN_ACCESS_ROUTES = [
     /^\/auth\/(login|logout)/,
     /\/alert\/chartink$/i,
-    /\/order\/webhook$/i
+    /\/order\/webhook$/i,
+    /^\/login/i,
+    /^\/assets\//i
 ]
 
 const authenticate = (req, res, next) => {
     const http = new HTTP(req, res, next)
     try {
-        if (OPEN_ACCESS_ROUTES.some(route => route.test(req.url.split(API_ROOT)[1]))) return next()
+        if (OPEN_ACCESS_ROUTES.some(route => route.test(req.url.split(API_ROOT)?.pop()))) return next()
+        //if (OPEN_ACCESS_ROUTES.some(route => route.test(req.url))) return next()
 
         if (!req.signedCookies?.access_token) throw new Error('Unauthorized access')
 
@@ -29,7 +32,8 @@ const authenticate = (req, res, next) => {
     } catch ({ message }) {
         log.error(`Auth.middleware : authenticate : ${message}`)
 
-        return http.send_message(401, message)
+        if (req.url.includes(API_ROOT)) return http.send_message(401, message)
+        return http.redirect(401, '/login')
     }
 }
 

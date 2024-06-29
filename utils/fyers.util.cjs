@@ -89,7 +89,7 @@ class Fyers {
 
     static async Generate_Login_Link() {
         try {
-            if (!!Fyers.#login_link) return Fyers.#login_link
+            //if (!!Fyers.#login_link) return Fyers.#login_link
 
             const fyers_model = new FyersAPI.fyersModel({ path: Fyers.#path })
             fyers_model.setAppId(APP_ID)

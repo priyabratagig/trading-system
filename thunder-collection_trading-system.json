@@ -2,7 +2,7 @@
     "clientName": "Thunder Client",
     "collectionName": "trading-system",
     "collectionId": "2c242b04-285c-4e80-b7a0-6f7abf13ffc3",
-    "dateExported": "2024-06-28T08:19:24.828Z",
+    "dateExported": "2024-06-29T06:36:29.276Z",
     "version": "1.2",
     "folders": [
         {
@@ -675,5 +675,5 @@
             "baseUrl": "http://localhost:5000/api/v1"
         }
     },
-    "ref": "5DxVIVnAx503HG8jl7LjG7Pfgnlt-UIYNOi_jV6mXYi9pTwsHijT37Rl1DHcPJDKljtzCG4b3LaiS3jS00XobA"
+    "ref": "5DxVIVnAx503HG8jl7LjG0RwKH3bkRDXDLQ6Fch5SW6yju7J-oB9dO5_B_zHFeTdccnTQ976iWcWuLI_Egjieg"
 }
