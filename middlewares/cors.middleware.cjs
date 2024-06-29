@@ -10,18 +10,14 @@ const corsOptions = {
                 return callback(null, true)
             }
 
-            const req_host = new URL(req_origin).hostname
-            const isAllowed = ALLOWED_ORIGINS.some(
-                allowed_origin =>
-                    (req_host === allowed_origin) ||
-                    req_host.endsWith(`.${allowed_origin}`) ||
-                    (req_host === new URL(allowed_origin).hostname)
-            )
+            const req_host = new URL(req_origin).hostname // sub.example.com
+            const req_domain_topleveldomain = req_host.split('.').slice(-2).join('.') // example.com
+
+            const isAllowed = ALLOWED_ORIGINS.includes(req_domain_topleveldomain)
             if (!isAllowed) throw new Error(`Origin ${req_origin} not allowed`)
 
             return callback(null, true)
-        }
-        catch (err) {
+        } catch (err) {
             log.error(`CORS.middleware : origin : error :${err.message}`)
 
             return callback(err, false)
