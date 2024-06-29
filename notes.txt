@@ -5,12 +5,14 @@ Next Release:
 3. Document object fected in insided methods, can be utilized
 3. Fyers token cancelation rules
 4. Find solution for whatsapp alerts
+5. Block request from unintened source by refer
+6. Refrsh gernerate link aftet click
+8. Show proper error on cross
+9. Add ssl to domain name
 
 Todo:
 ------------------------------
-1. Frontend x
-2. Deployment
-3. Handle cross x
+1. List maintainece tasks
 
 Capacity:
 ---------------------------
