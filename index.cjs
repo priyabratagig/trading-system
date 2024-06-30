@@ -4,6 +4,7 @@ const json_parser = express.json
 const mongoose = require('mongoose')
 const cookie_parser = require('cookie-parser')
 const path = require('path')
+const log = require('./utils/log.util.cjs')
 
 const authenticate = require('./middlewares/auth.middleware.cjs')
 const usecors = require('./middlewares/cors.middleware.cjs')
@@ -52,22 +53,33 @@ try {
         }
         else {
             console.log('Server is running in production mode')
+            log.info('Server is running in production mode')
             console.log(`Server is running on port ${SERVER_PORT}`)
+            console.log(`local: http://localhost:${SERVER_PORT}/`)
             console.log(`public: http://${SEVER_IP}:${SERVER_PORT}`)
+            log.info(`Server is running on port ${SERVER_PORT}`)
         }
     })
 
     mongoose.connect(MONGODB_URI)
         .then(() => {
-            if (MONGODB_INSTANCE_ATLAS) console.log(`Connected to MongoDB on ${MONGODB_CLUSTER} db ${MONGODB_DBNAMNE}`)
-            else console.log(`Connected to MongoDB on ${MONGODB_PORT} db ${MONGODB_DBNAMNE}`)
+            if (MONGODB_INSTANCE_ATLAS) {
+                console.log(`Connected to MongoDB on ${MONGODB_CLUSTER} db ${MONGODB_DBNAMNE}`)
+                log.info(`Connected to MongoDB on ${MONGODB_CLUSTER} db ${MONGODB_DBNAMNE}`)
+            }
+            else {
+                console.log(`Connected to MongoDB on ${MONGODB_PORT} db ${MONGODB_DBNAMNE}`)
+                log.info(`Connected to MongoDB on ${MONGODB_PORT} db ${MONGODB_DBNAMNE}`)
+            }
         })
         .catch((err) => {
-            console.error(err.message)
+            console.error(`Error connecting to MongoDB, ${err.message}`)
+            log.error(`Error connecting to MongoDB, ${err.message}`)
         })
 
 } catch (err) {
     console.error(err.message)
+    log.error(`Error starting server, ${err.message}`)
 }
 
 Subscribe_Orber_Jobs()
