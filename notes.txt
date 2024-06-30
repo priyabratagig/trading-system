@@ -6,13 +6,12 @@ Next Release:
 3. Fyers token cancelation rules
 4. Find solution for whatsapp alerts
 5. Block request from unintened source by refer
-6. Refrsh gernerate link aftet click
-8. Show proper error on cross
-9. Add ssl to domain name
+6. Add ssl to domain name
 
 Todo:
 ------------------------------
 1. List maintainece tasks
+2. backup csv stock data to github
 
 Capacity:
 ---------------------------

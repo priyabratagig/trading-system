@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken')
 const { HTTP, log } = require("../utils")
 
 const OPEN_ACCESS_ROUTES = [
-    /^\/auth\/(login|logout)/,
+    /^\/auth\/(login|logout)/i,
     /\/alert\/chartink$/i,
     /\/order\/webhook$/i,
     /^\/login/i,
