@@ -27,6 +27,8 @@ const Generate_Ideas = async (alerts) => {
             }
         }
 
+        if (ideas.length == 0) throw new Error(`No ideas generated`)
+
         Twilio.Send_WhatsApp_Message(
             `Generated Ideas✨ : \`\`\`${DateTime.To_String(DateTime.Datetime_From_DateTimeNum(ideas[0].time)).split(' GMT')[0]}\`\`\`
             ${ideas.reduce((str, { symbol, entry, target, stop, qty }) => {
@@ -56,6 +58,8 @@ const Generate_Ideas = async (alerts) => {
     }
     catch ({ message }) {
         log.error(`Idea.job : Generate_Ideas : ${message}`)
+
+        return -1
     }
 }
 

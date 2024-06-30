@@ -28,14 +28,14 @@ const AutoTrade = async (ideas) => {
             return 1
         }
 
-        log.info(`Trade.job : AutoTrade, ${orders.length} trades today`)
-
         const remaining_orders = 3 - orders.length
 
         for (let i = 0; i < remaining_orders; i++) {
             // Place order
             const order = await Place_Buy_Order({ ...ideas[i], type: TYPE[LIMIT] })
             if (!order || order == -1) throw new Error('Error placing order')
+
+            log.info(`Trade.job : AutoTrade : Order placed, symbol= ${ideas[i].symbol} entry= ${ideas[i].entry}, target= ${ideas[i].target}, stop= ${ideas[i].stop}, qty= ${ideas[i].qty} at ${time_num}`)
         }
 
         return 1
