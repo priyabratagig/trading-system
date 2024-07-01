@@ -17,7 +17,8 @@ Todo:
 4. Correct fyers.utils gerenrate auth_link
 5. Re-initiate fyers, twilio snadbox
 8. Debug fyers auth
-9. Check todays alert
+9. Proper place logs
+
 
 Capacity:
 ---------------------------

@@ -74,12 +74,12 @@ class Datetime {
                 Datetime.Datetime_From_DateTimeNum(parseInt(datetime, 10))
         if (!Datetime.isValid(now)) throw new Error(`Timestamp : Datetime invalid, ${datetime}`)
 
-        const year = datetime.getFullYear()
-        let month = String(datetime.getMonth() + 1).padStart(2, '0')
-        const day = String(datetime.getDate()).padStart(2, '0')
-        const hours = datetime.getHours().toString().padStart(2, '0')
-        const minutes = String(datetime.getMinutes()).padStart(2, '0')
-        const seconds = String(datetime.getSeconds()).padStart(2, '0')
+        const year = now.getFullYear()
+        let month = String(now.getMonth() + 1).padStart(2, '0')
+        const day = String(now.getDate()).padStart(2, '0')
+        const hours = now.getHours().toString().padStart(2, '0')
+        const minutes = String(now.getMinutes()).padStart(2, '0')
+        const seconds = String(now.getSeconds()).padStart(2, '0')
 
         const date_string = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`
         return date_string
