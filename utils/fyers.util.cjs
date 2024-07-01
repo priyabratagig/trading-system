@@ -62,7 +62,7 @@ class Fyers {
     }
 
     static Get_Status() {
-        return !!(Fyers.#refresh_token && Fyers.#access_token)
+        return Boolean(Fyers.#refresh_token && Fyers.#access_token)
     }
 
     static async #Notify_Access_Token() {
@@ -89,8 +89,6 @@ class Fyers {
 
     static async Generate_Login_Link() {
         try {
-            if (!!Fyers.#login_link) return Fyers.#login_link
-
             const fyers_model = new FyersAPI.fyersModel({ path: Fyers.#path })
             fyers_model.setAppId(APP_ID)
             fyers_model.setRedirectUrl(`https://trade.fyers.in/api-login/redirect-uri/index.html`)
@@ -98,7 +96,6 @@ class Fyers {
             Fyers.#Check_Error(response)
 
             Fyers.#login_link = response
-
             return response
         }
         catch ({ message }) {
@@ -111,7 +108,6 @@ class Fyers {
 
     static async Login(auth_code) {
         try {
-            if (!!Fyers.#refresh_token) return Fyers.#refresh_token
             if (!Fyers.#login_link) throw new Error('Login link not genereated')
 
             const fyers_model = new FyersAPI.fyersModel({ path: Fyers.#path })

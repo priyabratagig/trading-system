@@ -1,6 +1,7 @@
 const { createLogger, transports, format } = require('winston')
 const fs = require('fs')
 const path = require('path')
+const DateTime = require('./datetime.util.cjs')
 
 const directory = path.join(__dirname, '..', 'logs')
 const info_file = path.join(directory, 'app.info.log')
@@ -11,7 +12,7 @@ if (!fs.existsSync(directory)) fs.mkdirSync(directory)
 const logger_info = createLogger({
     level: 'info',
     format: format.combine(
-        format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }),
+        format.timestamp({ format: DateTime.Timestamp }),
         format.printf(({ timestamp, level, message }) => `${timestamp} :: ${level} :: ${message}`)
     ),
     transports: [
@@ -23,7 +24,7 @@ const logger_info = createLogger({
 const logger_error = createLogger({
     level: 'error',
     format: format.combine(
-        format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }),
+        format.timestamp({ format: DateTime.Timestamp }),
         format.printf(({ timestamp, level, message }) => `${timestamp} :: ${level} :: ${message}`)
     ),
     transports: [

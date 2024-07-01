@@ -30,7 +30,7 @@ const authenticate = (req, res, next) => {
 
         return next()
     } catch ({ message }) {
-        log.error(`Auth.middleware : authenticate : ${message}`)
+        log.error(`Auth.middleware : authenticate : ${message}, ${req.url} by ${req.ip}`)
 
         if (req.url.includes(API_ROOT)) return http.send_message(401, message)
         return http.redirect(401, '/login')

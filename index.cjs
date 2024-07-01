@@ -27,6 +27,7 @@ const Subscribe_Fyers_Job = require('./jobs/fyers.job.cjs')
 const Subscribe_Price_Monitor = require('./jobs/price_monitor.job.cjs')
 
 const app = express()
+app.set('trust proxy', true)
 app.use(usecors)
 app.use(cookie_parser(COOCKIE_SECRET))
 app.use(json_parser())

@@ -49,7 +49,7 @@ class Datetime {
             new Date(datetime) :
             isNaN(datetime) ?
                 Datetime.Now() :
-                Datetime.Datetime_From_DateTimeNum(+datetime)
+                Datetime.Datetime_From_DateTimeNum(parseInt(datetime, 10))
         if (!Datetime.isValid(now)) throw new Error(`Datetime_To_EPOCH : Datetime invalid, ${datetime}`)
 
         const year = datetime.getFullYear()
@@ -66,26 +66,22 @@ class Datetime {
         return epoch_time
     }
 
-    static Datetime_To_String(datetime) {
+    static Timestamp(datetime) {
         const now = datetime instanceof Date ?
             new Date(datetime) :
             isNaN(datetime) ?
                 Datetime.Now() :
-                Datetime.Datetime_From_DateTimeNum(+datetime)
-        if (!Datetime.isValid(now)) throw new Error(`Datetime_To_String : Datetime invalid, ${datetime}`)
+                Datetime.Datetime_From_DateTimeNum(parseInt(datetime, 10))
+        if (!Datetime.isValid(now)) throw new Error(`Timestamp : Datetime invalid, ${datetime}`)
 
         const year = datetime.getFullYear()
         let month = String(datetime.getMonth() + 1).padStart(2, '0')
         const day = String(datetime.getDate()).padStart(2, '0')
-        let hours = datetime.getHours()
+        const hours = datetime.getHours().toString().padStart(2, '0')
         const minutes = String(datetime.getMinutes()).padStart(2, '0')
-        const seconds = '00'
-        const meridiem = hours >= 12 ? 'PM' : 'AM'
-        hours = hours % 12
-        hours = hours ? hours : 12
-        hours = String(hours).padStart(2, '0')
+        const seconds = String(datetime.getSeconds()).padStart(2, '0')
 
-        const date_string = `${year}-${month}-${day} ${hours}:${minutes}:${seconds} ${meridiem}`
+        const date_string = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`
         return date_string
     }
 
@@ -146,7 +142,7 @@ class Datetime {
             new Date(time) :
             isNaN(time) ?
                 Datetime.Now() :
-                Datetime.Datetime_From_DateTimeNum(+time)
+                Datetime.Datetime_From_DateTimeNum(parseInt(time, 10))
         if (!Datetime.isValid(now)) throw new Error(`Get_Pervious_N_15Min_Time : Time invalid, ${time}`)
 
         const minutes = now.getMinutes()
@@ -177,7 +173,7 @@ class Datetime {
             new Date(time) :
             isNaN(time) ?
                 Datetime.Now() :
-                Datetime.Datetime_From_DateTimeNum(+time)
+                Datetime.Datetime_From_DateTimeNum(parseInt(time, 10))
         if (!Datetime.isValid(now)) throw new Error(`Get_Next_N_15Min_Time : Time invalid, ${time}`)
 
         const minutes = now.getMinutes()
@@ -207,7 +203,7 @@ class Datetime {
             new Date(date) :
             isNaN(date) ?
                 Datetime.Now() :
-                Datetime.Datetime_From_DateTimeNum(+date)
+                Datetime.Datetime_From_DateTimeNum(parseInt(date, 10))
         if (!Datetime.isValid(now)) throw new Error(`Get_Previous_N_Dates : Date invalid, ${date}`)
 
         const previous_dates = Array(n).fill(null).map((_, idx) => {
@@ -226,7 +222,7 @@ class Datetime {
             new Date(date) :
             isNaN(date) ?
                 Datetime.Now() :
-                Datetime.Datetime_From_DateTimeNum(+date)
+                Datetime.Datetime_From_DateTimeNum(parseInt(date, 10))
         if (!Datetime.isValid(now)) throw new Error(`Get_Next_N_Dates : Date invalid, ${date}`)
 
         const next_dates = Array(n).fill(null).map((_, idx) => {

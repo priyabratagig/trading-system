@@ -7,11 +7,17 @@ Next Release:
 4. Find solution for whatsapp alerts
 5. Block request from unintened source by refer
 6. Add ssl to domain name
+7. Correct utils log message
 
 Todo:
 ------------------------------
 1. List maintainece tasks
-2. backup csv stock data to github
+2. Backup csv stock data to github
+3. Add webhook secret checked implementation
+4. Correct fyers.utils gerenrate auth_link
+5. Re-initiate fyers, twilio snadbox
+8. Debug fyers auth
+9. Check todays alert
 
 Capacity:
 ---------------------------

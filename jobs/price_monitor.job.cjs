@@ -36,7 +36,7 @@ const Price_Monitor = async () => {
 
                 Twilio.Send_WhatsApp_Message(
                     `*IMPORTANT📌* :
-                    ${close <= stop ? 'Stop' : 'Target'} hit, *${symbol}* by ${close <= stop ? close : high}₹ at \`\`\`${DateTime.To_String().split(' GMT')[0]}\`\`\``
+                    ${close <= stop ? 'Stop' : 'Target'} hit, *${symbol}* by ${close <= stop ? close : high}₹ at \`\`\`${DateTime.Timestamp()}\`\`\``
                 ).catch(_ => log.error(`Price_Monitor.job : Price_Monitor : Error sending whatsapp message`))
             }
             else {

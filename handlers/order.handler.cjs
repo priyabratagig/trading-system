@@ -57,7 +57,7 @@ router.post('/webhook', async (req, res) => {
         log.info(`Oder.handler : /order/webhook, symbol= ${symbol}, order_id= ${order_id}, status= ${STATUS_REV[status]}, datetime= ${DateTime.To_String()}`)
 
         Twilio.Send_WhatsApp_Message(
-            `Order *${STATUS_REV[status]}*📨 : \`\`\`${DateTime.To_String().split(' GMT')[0]}\`\`\`
+            `Order *${STATUS_REV[status]}*📨 : \`\`\`${DateTime.Timestamp()}\`\`\`
             Symbol: *${symbol}* ${STATUS_REV[side]} at ${tradedPrice} qty.: ${filledQty}, ${message}`
         ).catch(_ => log.error(`Order.handler : /order/webhook : Error sending whatsapp message`))
 
