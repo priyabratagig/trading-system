@@ -14,9 +14,9 @@ router.post('/login', async (req, res) => {
         if (username !== USERNAME || password !== PASSWORD) throw new Error('Invalid credentials')
 
         Twilio.Send_WhatsApp_Message(
-            `Login attempted by ${req.ip} at ${DateTime.Timestamp()}`,
+            `Logged in from ${req.ip} at ${DateTime.Timestamp()}`,
         ).catch(() => log.error(`Auth.handler : /auth/login : Error sending whatsapp message`))
-        log.info(`Login attempted by ${req.ip} at ${DateTime.Timestamp()}`)
+        log.info(`Logged in from ${req.ip} at ${DateTime.Timestamp()}`)
 
         const access_token = jwt.sign(
             { USERNAME, PASSWORD },

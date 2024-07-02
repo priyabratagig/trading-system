@@ -1,7 +1,7 @@
 const { Idea } = require('../models')
 const { log, Twilio, DateTime } = require('../utils')
 const { Get_Buy_Target_Stop, Get_Funds } = require('../libs')
-const { default: AutoTrade } = require('./trade.job.cjs')
+const AutoTrade = require('./trade.job.cjs')
 
 const Generate_Ideas = async (alerts) => {
     try {
@@ -25,6 +25,8 @@ const Generate_Ideas = async (alerts) => {
             catch ({ message }) {
                 log.error(`Idea.job : Generate_Ideas : ${message}`)
             }
+            // Request rate limit
+            if (ideas.length % 10 == 0) await new Promise(resolve => setTimeout(resolve, 1000))
         }
 
         if (ideas.length == 0) throw new Error(`No ideas generated`)

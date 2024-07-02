@@ -1,7 +1,7 @@
 const router = require("express").Router()
 const { log, HTTP, DateTime, Twilio } = require('../utils')
 const { Order, Idea } = require('../models')
-const { SOURCE, API, CANCELLED, REJECTED, EXPIRED, FILLED, TRANSIST, BUY, SIDE, EXITED, STATUS_REV, TYPE_REV } = require('../config.cjs')
+const { API, CANCELLED, REJECTED, EXPIRED, FILLED, TRANSIST, BUY, SIDE, EXITED, STATUS_REV, TYPE_REV, SIDE_REV, SOURCE_REV } = require('../config.cjs')
 const { Get_All_Orders_Today, Place_Buy_Order, Place_Sell_Order, Place_Cancel_Order } = require("../libs")
 
 router.post('/buy', async (req, res) => {
@@ -42,26 +42,24 @@ router.post('/buy', async (req, res) => {
 router.post('/webhook', async (req, res) => {
     const http = new HTTP(req, res)
     try {
-        if (process.env.SYSTEM_STATUS == "OFF") {
-            log.info(`Order.handler : /order/webhook : recived order postback but system stopped`)
-
-            return http.send_status(200)
-        }
-
         const {
             id: order_id, side, status, qty, remainingQuantity, filledQty,
             limitPrice, stopPrice, type, orderValidity, source, message,
             symbol, tradedPrice
         } = req.body
 
-        log.info(`Oder.handler : /order/webhook, symbol= ${symbol}, order_id= ${order_id}, status= ${STATUS_REV[status]}, datetime= ${DateTime.To_String()}`)
+        if (process.env.SYSTEM_STATUS == "OFF") {
+            log.info(`Order.handler : /order/webhook : recived order status update but system stopped, symbol= ${symbol}, order_id= ${order_id}, source= ${SOURCE_REV[source]} status= ${STATUS_REV[status]}, datetime= ${DateTime.To_String()}`)
+            return http.send_status(200)
+        }
+        log.info(`Oder.handler : /order/webhook, symbol= ${symbol}, order_id= ${order_id}, source= ${SOURCE_REV[source]} status= ${STATUS_REV[status]}, datetime= ${DateTime.To_String()}`)
 
         Twilio.Send_WhatsApp_Message(
             `Order *${STATUS_REV[status]}*📨 : \`\`\`${DateTime.Timestamp()}\`\`\`
-            Symbol: *${symbol}* ${STATUS_REV[side]} at ${tradedPrice} qty.: ${filledQty}, ${message}`
+            Symbol: *${symbol}* ${SIDE_REV[side]} at ${tradedPrice} qty.: ${filledQty}, ${message}`
         ).catch(_ => log.error(`Order.handler : /order/webhook : Error sending whatsapp message`))
 
-        if (source != SOURCE[API]) return http.send_status(200)
+        if (SOURCE_REV[source] != API) return http.send_status(200)
 
         result = -1
         switch (STATUS_REV[status]) {
@@ -108,7 +106,7 @@ router.post('/webhook', async (req, res) => {
                 break
         }
 
-        if (result == -1) throw new Error(`Error updatign order, order_id= ${order_id} symbol= ${symbol}, status= ${STATUS_REV[status]}, datetime= ${DateTime.To_String()}`)
+        if (result == -1) throw new Error(`Error updatign order, symbol= ${symbol}, order_id= ${order_id}, source= ${SOURCE_REV[source]} status= ${STATUS_REV[status]}, datetime= ${DateTime.To_String()}`)
 
         return http.send_status(200)
     }

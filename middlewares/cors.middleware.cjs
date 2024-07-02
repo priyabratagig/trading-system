@@ -11,7 +11,7 @@ const cors_options = {
             }
 
             const req_host = new URL(req_origin).hostname // sub.example.com
-            const isAllowed = ALLOWED_ORIGINS.includes(req_host)
+            const isAllowed = ALLOWED_ORIGINS.some(allowed_origin => (allowed_origin === req_origin || allowed_origin === req_host))
             if (!isAllowed) throw new Error(`${req_origin} is blocked`)
 
             return callback(null, true)

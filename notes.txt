@@ -8,6 +8,7 @@ Next Release:
 5. Block request from unintened source by refer
 6. Add ssl to domain name
 7. Correct utils log message
+8. Upgrade security
 
 Todo:
 ------------------------------
@@ -16,8 +17,11 @@ Todo:
 3. Add webhook secret checked implementation
 4. Correct fyers.utils gerenrate auth_link
 5. Re-initiate fyers, twilio snadbox
-8. Debug fyers auth
+8. Debug fyers auth x
 9. Proper place logs
+11. Debug order status update
+12. Upgrade security x
+13. Add sleep to fyer api call x
 
 
 Capacity:

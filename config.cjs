@@ -83,6 +83,10 @@ const STATUS_REV = Object.freeze(
         ...Object.entries(STATUS).map(([key, value]) => ({ [value]: key }))
     )
 )
+const SOURCE_REV = Object.freeze(Object.assign(
+    {},
+    ...Object.entries(SOURCE).map(([key, value]) => ({ [value]: key }))
+))
 
 const TYPE_REV = Object.freeze(
     Object.assign(
@@ -187,6 +191,7 @@ module.exports = {
     STOP_LIMIT,
 
     SOURCE,
+    SOURCE_REV,
     MOBILE,
     WEB,
     FYERS_ONE,
