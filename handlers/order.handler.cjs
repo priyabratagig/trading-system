@@ -59,9 +59,9 @@ router.post('/webhook', async (req, res) => {
             Symbol: *${symbol}* ${SIDE_REV[side]} at ${tradedPrice} qty.: ${filledQty}, ${message}`
         ).catch(_ => log.error(`Order.handler : /order/webhook : Error sending whatsapp message`))
 
-        if (SOURCE_REV[source] != API) return http.send_status(200)
+        //if (SOURCE_REV[source] != API) return http.send_status(200)
 
-        result = -1
+        let result = -1
         switch (STATUS_REV[status]) {
             case CANCELLED:
             case REJECTED:
