@@ -89,11 +89,10 @@ class Datetime {
         if (!Datetime.isValid(date)) throw new Error(`DateNum_From_Date : Date invalid, ${date}`)
         date = new Date(date)
 
-        let month = date.getMonth() + 1
-        let day = date.getDate()
-        month = month.toString().padStart(2, '0')
-        day = day.toString().padStart(2, '0')
-        date = parseInt(`${date.getFullYear()}${month}${day}0000`, 10)
+        const year = date.getFullYear()
+        const month = String(date.getMonth() + 1).padStart(2, '0')
+        const day = String(date.getDate()).padStart(2, '0')
+        date = parseInt(`${year}${month}${day}0000`, 10)
 
         return date
     }
@@ -117,11 +116,13 @@ class Datetime {
         if (!match) throw Error(`TimeNum_From_12H : Time invalid, ${time}`)
 
         let [, hours, minutes, period] = match
-        hours = period.toLowerCase() == 'am' || hours == 12 ? +hours : 12 + +hours
+        hours = parseInt(hours, 10)
+        minutes = parseInt(minutes, 10)
+        hours = period.toLowerCase() == 'am' || hours == 12 ? hours : 12 + hours
 
         time = Datetime.Now()
-        time.setHours(+hours)
-        time.setMinutes(+minutes)
+        time.setHours(hours)
+        time.setMinutes(minutes)
 
         return Datetime.TimeNum_From_Time(time)
     }
@@ -137,7 +138,7 @@ class Datetime {
     }
 
     static Get_Pervious_N_15Min_Time({ n = 1, time } = {}) {
-        n = n <= 1 ? 1 : +n
+        n = n <= 1 ? 1 : parseInt(n, 10)
         const now = time instanceof Date ?
             new Date(time) :
             isNaN(time) ?
@@ -168,7 +169,7 @@ class Datetime {
     }
 
     static Get_Next_N_15Min_Time({ n = 1, time } = {}) {
-        n = n <= 1 ? 1 : +n
+        n = n <= 1 ? 1 : parseInt(n, 10)
         const now = time instanceof Date ?
             new Date(time) :
             isNaN(time) ?
@@ -198,7 +199,7 @@ class Datetime {
     }
 
     static Get_Previous_N_Dates({ n = 1, date } = {}) {
-        n = n <= 1 ? 1 : +n
+        n = n <= 1 ? 1 : parseInt(n, 10)
         const now = date instanceof Date ?
             new Date(date) :
             isNaN(date) ?
@@ -217,7 +218,7 @@ class Datetime {
     }
 
     static Get_Next_N_Dates({ n = 1, date } = {}) {
-        n = n <= 1 ? 1 : +n
+        n = n <= 1 ? 1 : parseInt(n, 10)
         const now = date instanceof Date ?
             new Date(date) :
             isNaN(date) ?
@@ -236,8 +237,8 @@ class Datetime {
     }
 
     static Get_Time_Diff_MS(date1, date2) {
-        date1 = date1 instanceof Date ? new Date(date1) : Datetime.Datetime_From_DateTimeNum(+date1)
-        date2 = date2 instanceof Date ? new Date(date2) : Datetime.Datetime_From_DateTimeNum(+date2)
+        date1 = date1 instanceof Date ? new Date(date1) : Datetime.Datetime_From_DateTimeNum(parseInt(date1, 10))
+        date2 = date2 instanceof Date ? new Date(date2) : Datetime.Datetime_From_DateTimeNum(parseInt(date2, 10))
 
         if (!Datetime.isValid(date1)) throw new Error(`Get_Time_Diff_MS : Datetime invalid, ${date1}`)
         if (!Datetime.isValid(date2)) throw new Error(`Get_Time_Diff_MS : Datetime invalid, ${date2}`)

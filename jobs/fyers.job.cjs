@@ -1,6 +1,7 @@
+const { CronJob } = require('cron')
 const { FyersEvent, log, Twilio } = require('../utils')
 const { Set_Funds, Delete_Funds } = require('../libs')
-const { ACCESS_TOKEN_VALIDITY, REFRESH_TOKEN_VALIDITY } = require('../config.cjs')
+const { REFRESH_TOKEN_VALIDITY } = require('../config.cjs')
 
 const Subscribe_Fyers_Job = () => {
     log.info('Fyers.job : Subscribe_Fyers_Job')
@@ -10,7 +11,7 @@ const Subscribe_Fyers_Job = () => {
         clearTimeout(logout_task_id)
         const log_out = async () => {
             log.info('Fyers.job : logout_aftre_15Days')
-            Fyers.Logout()
+            await Fyers.Logout()
             Twilio.Send_WhatsApp_Message(
                 `Fyers.job : logout_aftre_15Days : Loggedout from session`
             ).catch(_ => log.error(`Fyers.job : logout_aftre_15Days : Error sending whatsapp message`))
@@ -19,27 +20,33 @@ const Subscribe_Fyers_Job = () => {
     }
     new FyersEvent(FyersEvent.event.login, logout_aftre_15Days)
 
-    let refresh_token_task_id = null
-    const refresh_token_after_24Hrs = (Fyers) => {
-        clearTimeout(refresh_token_task_id)
-        const refresh_token = async () => {
-            log.info('Fyers.job : refresh_token_after_24Hrs')
-            Fyers.Refresh_Token()
+    let refresh_access_token_task = { stop() { } }
+    const refresh_token_at_9Am = (Fyers) => {
+        refresh_access_token_task.stop()
+        const refresh_access_token = async () => {
+            log.info('Fyers.job : refresh_token_at_9Am')
+            const res = await Fyers.Refresh_Token()
             Twilio.Send_WhatsApp_Message(
-                `Fyers.job : refresh_token_after_24Hrs : Session refreshed`
-            ).catch(_ => log.error(`Fyres.job : refresh_token_after_24Hrs : Error sending whatsapp message`))
+                `Fyers.job : refresh_token_at_9Am : ${res == -1 ? 'error refreshing access_token' : 'access_oken refreshed'}`
+            ).catch(_ => log.error(`Fyres.job : refresh_token_at_9Am : Error sending whatsapp message`))
         }
-        refresh_token_task_id = setTimeout(refresh_token, ACCESS_TOKEN_VALIDITY * 60 * 60 * 1000)
+        refresh_access_token_task = new CronJob(
+            '0 9 * * 1-5',
+            refresh_access_token,
+            null,
+            true,
+            'Asia/Kolkata'
+        )
     }
-    new FyersEvent(FyersEvent.event.login, refresh_token_after_24Hrs)
-    new FyersEvent(FyersEvent.event.refresh, refresh_token_after_24Hrs)
+    new FyersEvent(FyersEvent.event.login, refresh_token_at_9Am)
+    new FyersEvent(FyersEvent.event.refresh, refresh_token_at_9Am)
 
     let set_fund_task_id = null
     const set_fund_after_refresh = () => {
         clearImmediate(set_fund_task_id)
-        const set_fund = _ => {
+        const set_fund = async () => {
             log.info('Fyers.job : set_fund_after_refresh')
-            Set_Funds()
+            await Set_Funds()
         }
         set_fund_task_id = setImmediate(set_fund)
     }
@@ -49,9 +56,9 @@ const Subscribe_Fyers_Job = () => {
     let delete_fund_task_id = null
     const delete_fund_after_logout = () => {
         clearImmediate(delete_fund_task_id)
-        const delete_fund = _ => {
+        const delete_fund = async () => {
             log.info('Fyers.job : delete_fund_after_logout')
-            Delete_Funds()
+            await Delete_Funds()
         }
         delete_fund_task_id = setImmediate(delete_fund)
     }
