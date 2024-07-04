@@ -30,7 +30,7 @@ const authenticate = (req, res, next) => {
 
         return next()
     } catch ({ message }) {
-        log.error(`Auth.middleware : authenticate : ${message}, ${req.method}:${req.url} by ${req.ip}, payload: ${JSON.stringify(req.body) || "''"}, user-agent: ${req.headers['user-agent']}`)
+        log.auth.error(`Auth.middleware : authenticate : ${message}, ${req.method}:${req.url} by ${req.ip}, payload: ${JSON.stringify(req.body) || "''"}, user-agent: ${req.headers['user-agent']}`)
 
         if (req.url.includes(API_ROOT)) return http.send_message(401, message)
         return http.redirect(401, '/login')

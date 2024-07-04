@@ -54,7 +54,7 @@ const Generate_Ideas = async (alerts) => {
                 ...idea
             }))
 
-        AutoTrade(ideas)
+        AutoTrade(new_ideas)
 
         return new_ideas
     }

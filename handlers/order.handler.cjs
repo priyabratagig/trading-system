@@ -47,12 +47,13 @@ router.post('/webhook', async (req, res) => {
             limitPrice, stopPrice, type, orderValidity, source, message,
             symbol, tradedPrice
         } = req.body
+        log.orders.info(`Order update : ${JSON.stringify(req.body)}`)
 
         if (process.env.SYSTEM_STATUS == "OFF") {
-            log.info(`Order.handler : /order/webhook : recived order status update but system stopped, symbol= ${symbol}, order_id= ${order_id}, source= ${SOURCE_REV[source]} status= ${STATUS_REV[status]}, datetime= ${DateTime.To_String()}`)
+            log.info(`Order.handler : /order/webhook : recived order status update but system stopped, symbol= ${symbol}, order_id= ${order_id}, source= ${source} status= ${STATUS_REV[status]}, datetime= ${DateTime.To_String()}`)
             return http.send_status(200)
         }
-        log.info(`Oder.handler : /order/webhook, symbol= ${symbol}, order_id= ${order_id}, source= ${SOURCE_REV[source]} status= ${STATUS_REV[status]}, datetime= ${DateTime.To_String()}`)
+        log.info(`Oder.handler : /order/webhook, symbol= ${symbol}, order_id= ${order_id}, source= ${source} status= ${STATUS_REV[status]}, datetime= ${DateTime.To_String()}`)
 
         Twilio.Send_WhatsApp_Message(
             `Order *${STATUS_REV[status]}*📨 : \`\`\`${DateTime.Timestamp()}\`\`\`
@@ -106,7 +107,7 @@ router.post('/webhook', async (req, res) => {
                 break
         }
 
-        if (result == -1) throw new Error(`Error updatign order, symbol= ${symbol}, order_id= ${order_id}, source= ${SOURCE_REV[source]} status= ${STATUS_REV[status]}, datetime= ${DateTime.To_String()}`)
+        if (result == -1) throw new Error(`Error updatign order, symbol= ${symbol}, order_id= ${order_id}, source= ${source} status= ${STATUS_REV[status]}, datetime= ${DateTime.To_String()}`)
 
         return http.send_status(200)
     }

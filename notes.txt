@@ -22,6 +22,15 @@ Todo:
 5. Re-initiate fyers, twilio snadbox
 9. Proper place logs
 11. Debug order status update
+12. Strict params checks for all functions
+13. Correct autotrade params
+14. Need to fix order update
+15. Update color and glass to orders
+
+Branch --> Test-Production
+--------------------------------
+1. Separate log file for auth, order webhook, and regular log files
+2. Correct param for AutoTrade
 
 
 Capacity:
