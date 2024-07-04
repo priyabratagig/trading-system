@@ -115,6 +115,7 @@ const orders_info = (message) => {
 }
 
 module.exports = {
+    directory,
     error, info, warn,
     auth: {
         error: auth_error,
