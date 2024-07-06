@@ -26,11 +26,15 @@ Todo:
 13. Correct autotrade params
 14. Need to fix order update
 15. Update color and glass to orders
+16. Add websoketfor live postion pnl
 
 Branch --> Test-Production
 --------------------------------
-1. Separate log file for auth, order webhook, and regular log files
-2. Correct param for AutoTrade
+1. Separate log file for auth, order webhook, and regular log files x
+2. Correct param for AutoTrade x
+3. Order webhook update x
+4. Correct position modals
+5. Use https
 
 
 Capacity:

@@ -30,13 +30,13 @@ const logger_error = createLogger({
     ),
     transports: [
         //new transports.Console(),
-        new transports.File({ filename: error_file })
+        new transports.File({ filename: error_file }),
+        new transports.File({ filename: info_file })
     ]
 })
 
 const error = (message) => {
     //console.error(message)
-    logger_info.error(message)
     logger_error.error(message)
 }
 const info = (message) => {
@@ -67,13 +67,12 @@ const auth_logger_error = createLogger({
     ),
     transports: [
         //new transports.Console(),
-        new transports.File({ filename: error_file })
+        new transports.File({ filename: auth_file })
     ]
 })
 
 const auth_error = (message) => {
     //console.error(message)
-    auht_logger_ifno.error(message)
     auth_logger_error.error(message)
 }
 const auth_info = (message) => {
@@ -100,13 +99,12 @@ const orders_logger_error = createLogger({
     ),
     transports: [
         //new transports.Console(),
-        new transports.File({ filename: error_file })
+        new transports.File({ filename: orders_file })
     ]
 })
 
 const orders_error = (message) => {
     //console.error(message)
-    orders_logger_info.error(message)
     orders_logger_error.error(message)
 }
 const orders_info = (message) => {

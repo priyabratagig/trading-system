@@ -133,11 +133,11 @@ const Place_Sell_Order = async ({ buy_order_id, exit, type = TYPE[LIMIT] }) => {
         OrderEvent.sold(order_id, new_order, order._doc)
 
         const order_exit_time = DateTime.DateNum_Today() + DateTime.TimeNum_Now()
-        new_order = await Order.findOneAndUpdate(({ buy_order_id }, {
+        new_order = await Order.findOneAndUpdate({ buy_order_id }, {
             status: PENDING,
             sell_order_id: String(order_id),
             order_exit_time: order_exit_time
-        }))
+        })
         if (!new_order || new_order == -1) throw new Error(`Error updating sell order, order_deatils= ${JSON.stringify(order._doc)}`)
 
         new_order = new_order._doc
