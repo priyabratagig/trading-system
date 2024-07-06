@@ -33,7 +33,7 @@ Branch --> Test-Production
 1. Separate log file for auth, order webhook, and regular log files x
 2. Correct param for AutoTrade x
 3. Order webhook update x
-4. Correct position modals
+4. Correct position modals x
 5. Use https
 
 
