@@ -16,9 +16,11 @@ const authenticate = (req, res, next) => {
         if (OPEN_ACCESS_ROUTES.some(route => route.test(req.url.split(API_ROOT)?.pop()))) return next()
         //if (OPEN_ACCESS_ROUTES.some(route => route.test(req.url))) return next()
 
-        if (!req.signedCookies?.access_token) throw new Error('Unauthorized access')
+        const access_token = http.get_cookie('access_token', { signed: true })
 
-        const token = jwt.verify(req.signedCookies.access_token, JWT_SECRET, (err, token) => {
+        if (!access_token) throw new Error('Unauthorized access')
+
+        const token = jwt.verify(access_token, JWT_SECRET, (err, token) => {
             if (err) throw new Error(`Cannot authenticate, ${err.message}`)
 
             const { USERNAME, PASSWORD } = token
