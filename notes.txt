@@ -12,6 +12,7 @@ Next Release:
 9. Show all orders, ideas, alerts group days, weeks, months and year
 10. Let user delete trade direct from alerts
 11. Update security install WAF, use cloudflare etc
+12. Add sanitized ngnix setings on the repo
 
 Todo:
 ------------------------------
@@ -27,6 +28,9 @@ Todo:
 14. Need to fix order update
 15. Update color and glass to orders
 16. Add websoketfor live postion pnl
+17. Shift to secure and samesite cookies
+18. Add content security policy with helmet lib
+19. Add security to order webhook
 
 Branch --> Test-Production
 --------------------------------
@@ -34,7 +38,9 @@ Branch --> Test-Production
 2. Correct param for AutoTrade x
 3. Order webhook update x
 4. Correct position modals x
-5. Use https
+5. Use https x
+6. Add helmet csp (handled by ngnix)
+7. Use secure and samesite cookies x
 
 
 Capacity:
