@@ -1,7 +1,7 @@
 const router = require("express").Router()
 const { log, HTTP, DateTime, Twilio } = require('../utils')
 const { Order, Idea } = require('../models')
-const { API, CANCELLED, REJECTED, EXPIRED, FILLED, TRANSIST, BUY, SIDE, EXITED, STATUS_REV, TYPE_REV, SIDE_REV, SOURCE_REV, PENDING } = require('../config.cjs')
+const { API, CANCELLED, REJECTED, EXPIRED, FILLED, TRANSIST, BUY, SIDE, EXITED, STATUS_REV, TYPE_REV, SIDE_REV, SOURCE_REV, PENDING, STATUS } = require('../config.cjs')
 const { Get_All_Orders_Today, Place_Buy_Order, Place_Sell_Order, Place_Cancel_Order } = require("../libs")
 
 router.post('/buy', async (req, res) => {
@@ -57,18 +57,13 @@ router.post('/webhook', async (req, res) => {
 
         //if (SOURCE_REV[source] != API) return http.send_status(200)
 
+        if (status != STATUS[PENDING]) Twilio.Send_WhatsApp_Message(
+            `Order *${STATUS_REV[status]}*📨: \`\`\`${DateTime.Timestamp()}\`\`\`\n` +
+            `Symbol: *${symbol}* ${SIDE_REV[side]} at ${tradedPrice} qty.: ${filledQty}, ${message}`
+        ).catch(_ => log.error(`Order.handler : /order/webhook : Error sending whatsapp message`))
+
         let result = -1
         switch (STATUS_REV[status]) {
-            case CANCELLED:
-            case REJECTED:
-            case EXPIRED:
-            case FILLED:
-            case TRANSIST:
-                Twilio.Send_WhatsApp_Message(
-                    `Order *${STATUS_REV[status]}*📨: \`\`\`${DateTime.Timestamp()}\`\`\`\n` +
-                    `Symbol: *${symbol}* ${SIDE_REV[side]} at ${tradedPrice} qty.: ${filledQty}, ${message}`
-                ).catch(_ => log.error(`Order.handler : /order/webhook : Error sending whatsapp message`))
-
             case CANCELLED:
             case REJECTED:
             case EXPIRED:

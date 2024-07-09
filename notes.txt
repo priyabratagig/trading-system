@@ -31,6 +31,7 @@ Todo:
 17. Shift to secure and samesite cookies
 18. Add content security policy with helmet lib
 19. Add security to order webhook
+20. Fix data difference between fyers and chartink [!important]
 
 Branch --> Test-Production
 --------------------------------
@@ -41,7 +42,9 @@ Branch --> Test-Production
 5. Use https x
 6. Add helmet csp (handled by ngnix)
 7. Use secure and samesite cookies x
-
+8. Fix order webhook
+9. log everywhere
+10. merger to main
 
 Capacity:
 ---------------------------
